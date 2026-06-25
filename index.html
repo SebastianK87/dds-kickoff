@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>WELCOME IN · D!'s Dance World Kick-off</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Web-Fallback-Fonts. Für 100% CI: @font-face für
+     "Queering Heavy Extended" (Display) und "Overused Grotesk" (Body) ergänzen. -->
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1c1c1c;        /* Bühne dunkel */
+  --ink2:#272727;       /* CI Ink */
+  --mist:#E1E2DC;       /* CI Mist */
+  --pink:#FFA7E2;       /* CI Pink */
+  --gold:#B29261;       /* CI Gold */
+  --paper:#F4F3EE;      /* helles Papier */
+  --muted:#9a9a93;
+  --card:rgba(255,255,255,.045);
+  --line:rgba(255,255,255,.12);
+  --disp:'Queering Heavy Extended','Archivo',system-ui,sans-serif;
+  --body:'Overused Grotesk','Inter',system-ui,sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  min-height:100svh;background:#0b0b0c;color:var(--mist);font-family:var(--body);
+  -webkit-font-smoothing:antialiased;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+/* ambient backdrop (nur sichtbar im Desktop-Letterbox) */
+body::before{
+  content:"";position:fixed;inset:-20%;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(60% 50% at 70% 12%,rgba(255,167,226,.16),transparent 60%),
+    radial-gradient(50% 40% at 20% 90%,rgba(178,146,97,.12),transparent 60%);
+  filter:blur(8px);
+}
+
+/* ---------- 9:16 DEVICE-FRAME ---------- */
+.device{
+  position:relative;z-index:1;overflow:hidden;
+  width:100vw;height:100svh;background:var(--ink);
+}
+@media (min-width:760px){
+  :root{--dh:min(calc(100svh - 48px),900px)}
+  body{padding:24px}
+  .device{
+    height:var(--dh);width:calc(var(--dh) * 9 / 16);
+    border-radius:38px;
+    box-shadow:0 50px 130px -25px rgba(0,0,0,.75),0 0 0 1px rgba(255,255,255,.07),inset 0 0 0 1px rgba(255,255,255,.02);
+  }
+}
+
+/* HUD: Marke + Slide-Zähler + Fortschritt, liegt fix über der Bühne */
+.hud{position:absolute;top:0;left:0;right:0;z-index:6;pointer-events:none;
+  padding:18px 22px 0;display:flex;align-items:center;justify-content:space-between;
+  font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(225,226,220,.6);font-weight:700}
+.hud .brand{color:var(--mist)}
+.hud .brand b{color:var(--pink)}
+.hud .count{font-variant-numeric:tabular-nums}
+.hud .count em{color:var(--pink);font-style:normal}
+#bar{position:absolute;top:0;left:0;height:3px;width:0;z-index:7;
+  background:linear-gradient(90deg,var(--pink),var(--gold));transition:width .12s linear}
+
+/* ---------- BUEHNE / SCROLL-DECK ---------- */
+.stage{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;
+  scroll-snap-type:y proximity;container-type:inline-size;
+  scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.stage::-webkit-scrollbar{display:none}
+
+.slide{position:relative;min-height:100%;display:flex;align-items:center;
+  padding:88px 26px 74px;scroll-snap-align:start;border-top:1px solid var(--line);overflow:hidden}
+.slide:first-child{border-top:0}
+.slide.dense{align-items:flex-start;padding-top:96px}
+.wrap{width:100%;max-width:560px;margin:0 auto;position:relative;z-index:2}
+.slide.light{background:var(--paper);color:var(--ink2);border-top:1px solid rgba(0,0,0,.08)}
+.slide.mist{background:var(--mist);color:var(--ink2);border-top:1px solid rgba(0,0,0,.08)}
+
+/* ---------- TYPO ---------- */
+.eyebrow{font-family:var(--body);font-weight:700;font-size:.74rem;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:block}
+h1{font-family:var(--disp);font-weight:900;font-size:clamp(48px,16cqw,96px);line-height:.88;
+  letter-spacing:-.01em;text-transform:uppercase;color:#fff}
+h1 .pink{color:var(--pink)}
+h2{font-family:var(--disp);font-weight:900;font-size:clamp(26px,8.4cqw,46px);line-height:1.02;
+  letter-spacing:-.01em;color:#fff}
+.slide.light h2,.slide.mist h2{color:var(--ink2)}
+.lead{font-size:clamp(15px,4cqw,20px);line-height:1.5;color:var(--muted);margin-top:18px;max-width:40ch}
+.slide.light .lead,.slide.mist .lead{color:#55554f}
+.ko-sub{font-size:clamp(16px,4.6cqw,24px);color:var(--mist);margin-top:24px;font-weight:500;max-width:30ch}
+.big{font-family:var(--disp);font-weight:900;font-size:clamp(72px,32cqw,150px);line-height:.82;
+  color:var(--pink);letter-spacing:-.02em;position:relative;z-index:2}
+.tag{display:inline-block;font-family:var(--body);font-weight:700;font-size:.68rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--pink);border:1px solid var(--pink);border-radius:999px;padding:6px 15px;margin-bottom:24px}
+
+/* Geister-Zahl für Parallax-Tiefe */
+.ghost{position:absolute;z-index:0;font-family:var(--disp);font-weight:900;line-height:.8;
+  color:rgba(255,167,226,.05);font-size:clamp(180px,70cqw,420px);letter-spacing:-.04em;
+  top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;user-select:none}
+
+/* ---------- CARDS / FEATURES ---------- */
+.grid{display:grid;gap:12px;margin-top:28px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 22px}
+.slide.light .card,.slide.mist .card{background:#fff;border-color:rgba(0,0,0,.07);box-shadow:0 8px 26px rgba(0,0,0,.05)}
+.card h3{font-family:var(--body);font-weight:700;font-size:1.05rem;color:inherit;margin-bottom:6px}
+.card p{font-size:.92rem;line-height:1.42;color:var(--muted)}
+.slide.light .card p,.slide.mist .card p{color:#65655f}
+.num-badge{font-family:var(--disp);font-weight:900;font-size:1.35rem;color:var(--pink);display:block;margin-bottom:8px}
+.slide.light .num-badge,.slide.mist .num-badge{color:var(--gold)}
+
+.feats{display:flex;flex-direction:column;gap:8px;margin-top:18px}
+.feat{display:flex;gap:13px;align-items:flex-start;background:var(--card);border:1px solid var(--line);
+  border-radius:14px;padding:11px 15px}
+.feat .fi{flex:none;font-family:var(--disp);font-weight:900;color:var(--pink);font-size:1rem;
+  width:26px;height:26px;border-radius:50%;border:1px solid rgba(255,167,226,.4);
+  display:flex;align-items:center;justify-content:center;margin-top:1px;font-size:.78rem}
+.feat b{display:block;font-weight:700;font-size:.98rem;color:var(--mist);margin-bottom:1px}
+.feat span{font-size:.85rem;color:var(--muted);line-height:1.35}
+
+/* ---------- LISTS / STEPS ---------- */
+ul.clean{list-style:none;margin-top:26px;display:flex;flex-direction:column;gap:13px}
+ul.clean li{font-size:1rem;line-height:1.4;padding-left:26px;position:relative;color:inherit}
+ul.clean li::before{content:"";position:absolute;left:0;top:.5em;width:9px;height:9px;border-radius:50%;background:var(--pink)}
+.steps{counter-reset:s;list-style:none;margin-top:28px;display:flex;flex-direction:column;gap:16px}
+.steps li{position:relative;padding-left:54px;min-height:38px;display:flex;align-items:center;font-size:1rem;line-height:1.32}
+.steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:50%;transform:translateY(-50%);
+  width:38px;height:38px;border-radius:50%;background:var(--pink);color:var(--ink2);
+  font-family:var(--disp);font-weight:900;font-size:1.05rem;display:flex;align-items:center;justify-content:center}
+
+/* ---------- PREISE ---------- */
+.wp{background:linear-gradient(150deg,#332033,#1a1a1a 70%);border:1px solid rgba(255,167,226,.25);
+  border-radius:24px;padding:28px;margin-top:28px;position:relative;overflow:hidden;will-change:transform}
+.wp .pname{font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);font-size:.74rem;display:block}
+.wp-amt{font-family:var(--disp);font-weight:900;font-size:clamp(56px,22cqw,92px);color:#fff;line-height:.9;margin:6px 0 4px}
+.wp-tag{font-weight:600;font-size:1.05rem;color:#fff;margin-bottom:16px}
+.mini{list-style:none;display:flex;flex-wrap:wrap;gap:8px 18px}
+.mini li{position:relative;font-size:.9rem;color:var(--mist);padding-left:16px}
+.mini li::before{content:"/";position:absolute;left:0;color:var(--gold);font-weight:700}
+.mini.check{flex-direction:column;gap:9px;margin-top:14px}
+.mini.check li{padding-left:24px;color:var(--muted)}
+.mini.check li::before{content:"";left:2px;top:.45em;width:11px;height:6px;
+  border-left:2px solid var(--pink);border-bottom:2px solid var(--pink);transform:rotate(-45deg)}
+.anrech{margin-top:14px;background:var(--pink);color:var(--ink2);border-radius:14px;
+  padding:13px 18px;font-weight:600;font-size:.95rem}
+
+.tier{background:linear-gradient(160deg,#241f24,#191919);border:1px solid rgba(255,255,255,.1);
+  border-radius:20px;padding:22px 24px;position:relative;will-change:transform}
+.tier+.tier{margin-top:14px}
+.tier.reco{border:1.5px solid var(--pink);background:linear-gradient(160deg,#2c2230,#191919)}
+.reco-tag{position:absolute;top:-11px;right:20px;background:var(--pink);color:var(--ink2);
+  font-weight:700;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;border-radius:999px;padding:5px 12px}
+.tier .pname{font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.78rem;color:var(--mist);display:block;margin-bottom:6px}
+.tier .amt{font-family:var(--disp);font-weight:900;font-size:2.5rem;color:#fff;line-height:1;display:flex;align-items:baseline;gap:8px}
+.tier .amt small{font-family:var(--body);font-size:.8rem;color:var(--muted);font-weight:500}
+.tier .terms{font-size:.82rem;color:var(--gold);font-weight:600;margin:6px 0 2px}
+.foot-note{margin-top:18px;font-size:.88rem;color:var(--muted);font-style:italic}
+
+.drops{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:28px}
+.drop{background:linear-gradient(160deg,#241f24,#191919);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:18px 12px;text-align:center}
+.drop .d-amt{font-family:var(--disp);font-weight:900;font-size:1.7rem;color:#fff;line-height:1}
+.drop .d-n{font-weight:700;font-size:.82rem;color:var(--pink);margin-top:8px}
+.drop .d-t{font-size:.74rem;color:var(--muted);margin-top:3px}
+@media (max-width:360px){.drops{grid-template-columns:1fr}.drop{display:flex;justify-content:space-between;align-items:center;text-align:left}.drop .d-n,.drop .d-t{margin-top:0}}
+
+/* ---------- JOURNEY-FLOW ---------- */
+.flow{display:flex;flex-direction:column;gap:8px;margin-top:28px}
+.ph{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:16px 20px}
+.ph b{font-family:var(--body);font-weight:700;color:var(--pink);display:block;font-size:.72rem;
+  letter-spacing:.13em;text-transform:uppercase;margin-bottom:5px}
+.ph span{font-size:.96rem;color:var(--mist)}
+.arrow{text-align:center;color:var(--gold);font-size:1.2rem;line-height:.2;height:6px}
+
+/* ---------- CHURN ---------- */
+#churn-ablauf,#churn-alt{background:radial-gradient(circle at 30% 0%,#3a2233,#1a1a1a 62%)}
+.churn-cols{display:grid;grid-template-columns:1fr;gap:12px;margin-top:28px}
+.alt{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 22px}
+.alt h4{font-family:var(--body);font-weight:700;color:var(--pink);font-size:.98rem;margin-bottom:2px}
+.alt h4+p{margin-bottom:14px}
+.alt p{font-size:.88rem;color:var(--muted)}
+.alt p:last-child{margin-bottom:0}
+
+/* ---------- SCROLL-CUE ---------- */
+.scrollcue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:3;
+  font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);
+  display:flex;flex-direction:column;align-items:center;gap:7px}
+.scrollcue .dot{width:5px;height:5px;border-radius:50%;background:var(--pink);animation:fall 1.6s infinite}
+@keyframes fall{0%{transform:translateY(-6px);opacity:0}40%{opacity:1}100%{transform:translateY(10px);opacity:0}}
+
+/* ---------- BUILD UP / DOWN ---------- */
+.reveal{opacity:0;transform:translateY(30px);
+  transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.slide.active .reveal{opacity:1;transform:none}
+.slide:not(.active) .reveal{transition-duration:.5s}
+.stagger .reveal:nth-child(1){transition-delay:.03s}
+.stagger .reveal:nth-child(2){transition-delay:.09s}
+.stagger .reveal:nth-child(3){transition-delay:.15s}
+.stagger .reveal:nth-child(4){transition-delay:.21s}
+.stagger .reveal:nth-child(5){transition-delay:.27s}
+.stagger .reveal:nth-child(6){transition-delay:.33s}
+.stagger .reveal:nth-child(7){transition-delay:.39s}
+.stagger .reveal:nth-child(8){transition-delay:.45s}
+
+/* ---------- HOVER ---------- */
+.card,.feat,.ph,.alt,.drop{transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .4s var(--ease),background .35s var(--ease)}
+@media (hover:hover) and (pointer:fine){
+  .card:hover,.feat:hover,.ph:hover,.alt:hover,.drop:hover{
+    transform:translateY(-5px);border-color:var(--pink);box-shadow:0 18px 42px -14px rgba(0,0,0,.55)}
+  .slide.light .card:hover,.slide.mist .card:hover{box-shadow:0 18px 42px -16px rgba(0,0,0,.2)}
+  .tilt{transition:transform .25s var(--ease)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .stage{scroll-snap-type:none}
+  .reveal{opacity:1;transform:none;transition:none}
+  .scrollcue .dot{animation:none}
+}
+</style>
+</head>
+<body>
+<div class="device">
+  <div id="bar"></div>
+  <div class="hud">
+    <span class="brand">D!<b>'</b>S DANCE WORLD</span>
+    <span class="count"><em id="cur">01</em> / <span id="tot">23</span></span>
+  </div>
+
+  <div class="stage" id="stage">
+
+    <!-- 1 HERO -->
+    <section class="slide active" id="hero">
+      <span class="ghost" data-depth=".18">IN</span>
+      <div class="wrap">
+        <span class="eyebrow reveal">D!'s Dance World · Kick-off</span>
+        <h1 class="reveal">Welcome<br><span class="pink">In</span></h1>
+        <p class="ko-sub reveal">Unser neuer Weg vom ersten Kontakt zum Mitglied.</p>
+      </div>
+      <div class="scrollcue">Scrollen<span class="dot"></span></div>
+    </section>
+
+    <!-- 2 ANALYSE -->
+    <section class="slide">
+      <div class="wrap stagger">
+        <span class="eyebrow reveal">Vorab</span>
+        <h2 class="reveal">Wir haben nicht geraten.<br>Wir haben nachgesehen.</h2>
+        <p class="lead reveal">Zwei Zahlen aus unseren eigenen Daten erklären, warum wir den Einstieg neu bauen. Sie sind belegt, nicht geschätzt.</p>
+      </div>
+    </section>
+
+    <!-- 3 BEFUND 1 -->
+    <section class="slide">
+      <span class="ghost" data-depth=".22">€</span>
+      <div class="wrap stagger">
+        <span class="eyebrow reveal">Befund 1</span>
+        <div class="big reveal num" data-to="84000" data-suffix=" €">0</div>
+        <h2 class="reveal" style="font-size:clamp(20px,6cqw,30px);margin-top:16px">kostet uns der Counter pro Jahr.</h2>
+        <p class="lead reveal">Und bringt davon bisher keinen einzigen Abschluss zurück.</p>
+      </div>
+    </section>
+
+    <!-- 4 BEFUND 2 -->
+    <section class="slide">
+      <span class="ghost" data-depth=".22">1700</span>
+      <div class="wrap stagger">
+        <span class="eyebrow reveal">Befund 2</span>
+        <div class="big reveal num" data-to="1700">0</div>
+        <h2 class="reveal" style="font-size:clamp(20px,6cqw,30px);margin-top:16px">Gäste waren nur ein einziges Mal da.</h2>
+        <p class="lead reveal">Sie haben unser Haus betreten, getanzt und sind wieder gegangen. Ohne dass wir wussten, wer sie sind.</p>
+      </div>
+    </section>
+
+    <!-- 5 VISION -->
+    <section class="slide mist">
+      <div class="wrap stagger">
+        <span class="eyebrow reveal">Die Wende</span>
+        <h2 class="reveal">Wir verkaufen keine Class.<br>Wir schaffen Zugehörigkeit.</h2>
+        <p class="lead reveal">Die Membership ist nicht der Anfang. Sie ist das Ergebnis einer guten Experience. Wer sich gesehen fühlt, bleibt.</p>
+      </div>
+    </section>
+
+    <!-- 6 WARUM WELCOME PASS -->
+    <section class="slide dense">
+      <div class="wrap">
+        <span class="eyebrow reveal">Der Hebel</span>
+        <h2 class="reveal">Warum wir den<br>Welcome Pass integrieren</h2>
+        <div class="feats stagger">
+          <div class="feat reveal"><span class="fi">01</span><div><b>Zwei Mal im Haus</b><span>Zwei echte Kontaktpunkte statt einem Besuch.</span></div></div>
+          <div class="feat reveal"><span class="fi">02</span><div><b>Mehr Kontakt</b><span>Beziehung entsteht, bevor es ums Geld geht.</span></div></div>
+          <div class="feat reveal"><span class="fi">03</span><div><b>Ein echtes Verkaufstool</b><span>29 €, voll anrechenbar. Niedrige Hürde, verbindlich.</span></div></div>
+          <div class="feat reveal"><span class="fi">04</span><div><b>Mehr Leads am Ende</b><span>Jeder Gast wird erfasst und nachgefasst.</span></div></div>
+          <div class="feat reveal"><span class="fi">05</span><div><b>Schlanke Abo-Struktur</b><span>Zwei klare Tarife. Schnellere Entscheidung.</span></div></div>
+          <div class="feat reveal"><span class="fi">06</span><div><b>Klare USPs</b><span>Alle Vorteile sichtbar und verständlich.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 PREISE · WELCOME PASS -->
+    <section class="slide light">
+      <div class="wrap">
+        <span class="eyebrow reveal" style="color:var(--gold)">Preise &amp; Angebote · 01</span>
+        <h2 class="reveal">Dein Einstieg,<br>ohne Risiko</h2>
+        <div class="wp tilt reveal">
+          <span class="pname">Welcome Pass</span>
+          <div class="wp-amt"><span class="num" data-to="29" data-suffix=" €">0</span></div>
+          <div class="wp-tag">2 Classes, ein echtes Kennenlernen.</div>
+          <ul class="mini">
+            <li>2 Check-ins</li><li>10 Tage gültig</li><li>ohne Abo, ohne Bindung</li>
+          </ul>
+        </div>
+        <div class="anrech reveal">Die 29 € werden voll auf deine Membership angerechnet.</div>
+      </div>
+    </section>
+
+    <!-- 8 PREISE · MEMBERSHIPS -->
+    <section class="slide light dense">
+      <div class="wrap">
+        <span class="eyebrow reveal" style="color:var(--gold)">Preise &amp; Angebote · 02</span>
+        <h2 class="reveal">Zwei Memberships.<br>Mehr nicht.</h2>
+        <div class="stagger" style="margin-top:26px">
+          <div class="tier tilt reveal">
+            <span class="pname">Basic</span>
+            <div class="amt">55 €<small>/ Monat</small></div>
+            <div class="terms">im Jahresabo · 65 € monatlich</div>
+            <ul class="mini check">
+              <li>8 Check-ins pro Monat</li>
+              <li>Alle Standard-Classes</li>
+              <li>30 Tage Kündigungsfrist</li>
+            </ul>
+          </div>
+          <div class="tier reco tilt reveal">
+            <span class="reco-tag">Empfohlen</span>
+            <span class="pname">Unlimited</span>
+            <div class="amt">69 €<small>/ Monat</small></div>
+            <div class="terms">im Jahresabo · 79 € monatlich</div>
+            <ul class="mini check">
+              <li>Unbegrenzt alle Classes</li>
+              <li>Jederzeit, ohne Limit</li>
+              <li>30 Tage Kündigungsfrist</li>
+            </ul>
+          </div>
+        </div>
+        <p class="foot-note reveal">Kündigungsfrist 30 Tage zum Laufzeitende.</p>
+      </div>
+    </section>
+
+    <!-- 9 PREISE · DROP-INS -->
+    <section class="slide light">
+      <div class="wrap">
+        <span class="eyebrow reveal" style="color:var(--gold)">Preise &amp; Angebote · 03</span>
+        <h2 class="reveal">Drop-In-Karten</h2>
+        <p class="lead reveal" style="color:#55554f">Ohne Mitgliedschaft. Flexibel, wann du willst.</p>
+        <div class="drops stagger">
+          <div class="drop reveal"><div class="d-amt">69 €</div><div class="d-n">3er-Karte</div><div class="d-t">2 Monate gültig</div></div>
+          <div class="drop reveal"><div class="d-amt">99 €</div><div class="d-n">5er-Karte</div><div class="d-t">3 Monate gültig</div></div>
+          <div class="drop reveal"><div class="d-amt">179 €</div><div class="d-n">10er-Karte</div><div class="d-t">6 Monate gültig</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 JOURNEY -->
+    <section class="slide dense">
+      <div class="wrap">
+        <span class="eyebrow reveal">Die Customer Journey</span>
+        <h2 class="reveal">So läuft der Weg<br>vom Kauf bis zum Abo</h2>
+        <div class="flow stagger">
+          <div class="ph reveal"><b>Phase 1 · Kauf &amp; Vorfreude</b><span>Buchung, Willkommens-Mail, Infos zum Besuch</span></div>
+          <div class="arrow reveal">&darr;</div>
+          <div class="ph reveal"><b>Phase 2 · Erster Besuch</b><span>Welcome Desk, First Class Card, Coach, Nachgespräch</span></div>
+          <div class="arrow reveal">&darr;</div>
+          <div class="ph reveal"><b>Phase 3 · Zweiter Besuch</b><span>Empfang mit Vorwissen, Goodie, Membership-Gespräch</span></div>
+          <div class="arrow reveal">&darr;</div>
+          <div class="ph reveal"><b>Abschluss</b><span>Basic oder Unlimited, sonst Telefon-Follow-up</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 LEAD-QUELLEN -->
+    <section class="slide mist dense">
+      <div class="wrap">
+        <span class="eyebrow reveal">Wer kommt zu uns</span>
+        <h2 class="reveal">Jeder Gast startet<br>die Journey</h2>
+        <div class="grid stagger">
+          <div class="card reveal"><span class="num-badge">01</span><h3>Welcome Pass</h3><p>29 €, zwei Check-ins. Der geführte Einstieg.</p></div>
+          <div class="card reveal"><span class="num-badge">02</span><h3>Drop-In-Karten</h3><p>3er, 5er, 10er. Flexibel ohne Abo.</p></div>
+          <div class="card reveal"><span class="num-badge">03</span><h3>USC-Member</h3><p>Sind jetzt Teil der Journey. Im Testlauf bekommen sie ebenfalls den Welcome Pass.</p></div>
+          <div class="card reveal"><span class="num-badge">04</span><h3>Walk-In</h3><p>Wird direkt am Counter beraten und in den Welcome Pass geführt.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 SCHICHTBEGINN · LEADS -->
+    <section class="slide dense">
+      <div class="wrap">
+        <span class="eyebrow reveal">Schichtbeginn</span>
+        <h2 class="reveal">Der Tag beginnt<br>mit den Leads</h2>
+        <p class="lead reveal">Direkt zu Schichtbeginn werden die Lead-Quellen überwacht. Kein Lead bleibt liegen.</p>
+        <ul class="clean stagger">
+          <li class="reveal">E-Mails sowie An- und Abmeldungen prüfen</li>
+          <li class="reveal">WhatsApp Business beantworten</li>
+          <li class="reveal">Instagram-Anfragen sichten</li>
+          <li class="reveal">Telefonnummer da? Direkt anrufen. Sonst per E-Mail oder WhatsApp.</li>
+          <li class="reveal">Immer zum Welcome Pass hinleiten.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 13 SCHICHTBEGINN · AUFTRETEN -->
+    <section class="slide dense">
+      <div class="wrap">
+        <span class="eyebrow reveal">Schichtbeginn</span>
+        <h2 class="reveal">Bereit, bevor<br>der Gast kommt</h2>
+        <div class="grid stagger">
+          <div class="card reveal"><h3>Auftreten</h3><p>Gepflegtes Äußeres. Wir stehen auf, wenn Gäste kommen, und sitzen nicht am Counter. Aktiv begrüßen, mit Namen ansprechen.</p></div>
+          <div class="card reveal"><h3>Vorbereiten</h3><p>Erstbesucher-Check-ins aus Eversports ziehen, Welcome Cards mit Namen vorbereiten und bereitlegen.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14 WELCOME DESK -->
+    <section class="slide dense">
+      <div class="wrap">
+        <span class="eyebrow reveal">Erster Besuch</span>
+        <h2 class="reveal">Der erste Eindruck<br>am Welcome Desk</h2>
+        <ol class="steps stagger">
+          <li class="reveal">Aktiv und mit Namen begrüßen</li>
+          <li class="reveal">Vorbereitete Welcome Card übergeben</li>
+          <li class="reveal">Telefonnummer füllt der Gast selbst aus</li>
+          <li class="reveal">Procedere erklären, Karte dem Coach mitgeben</li>
+          <li class="reveal">Nach der Class Welcome Cards einsammeln</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 15 COACH -->
+    <section class="slide mist dense">
+      <div class="wrap">
+        <span class="eyebrow reveal">In der Class</span>
+        <h2 class="reveal">Der Coach schafft<br>den Moment</h2>
+        <p class="lead reveal">Briefing für jeden Erstbesucher: „Schön, dass du da warst. Wie hat es dir gefallen?"</p>
+        <div class="grid stagger">
+          <div class="card reveal"><h3>Drei Minuten früher</h3><p>Bei Welcome-Pass-Membern endet der Unterricht drei Minuten früher, damit Zeit für das Gespräch bleibt.</p></div>
+          <div class="card reveal"><h3>Begleiten</h3><p>Bei mehreren Gästen in die Lounge oder den Vorraum begleiten, Gespräch führen und zum Welcomer leiten.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 16 NACHGESPRAECH -->
+    <section class="slide">
+      <div class="wrap stagger">
+        <span class="eyebrow reveal">Nach der Class</span>
+        <h2 class="reveal">Jetzt zählt<br>die Beziehung</h2>
+        <ul class="clean reveal" style="margin-top:24px">
+          <li>Wie hat dir die Class gefallen?</li>
+          <li>War der Style das Richtige für dich?</li>
+          <li>Welchen Style möchtest du als Nächstes ausprobieren?</li>
+        </ul>
+        <p class="lead reveal">Kein Druck, kein Verkauf. Erst Beziehung, dann Membership. Immer die nächste Class empfehlen.</p>
+      </div>
+    </section>
+
+    <!-- 17 ZWEITER BESUCH -->
+    <section class="slide dense">
+      <div class="wrap stagger">
+        <span class="eyebrow reveal">Zweiter Besuch</span>
+        <h2 class="reveal">Beim zweiten Mal<br>kennen wir dich</h2>
+        <p class="lead reveal">Aus Eversports wissen wir vorab, wer zum zweiten Mal kommt, und empfangen mit Vorwissen.</p>
+        <div class="card reveal" style="margin-top:24px;border-color:var(--pink)">
+          <h3 style="color:var(--pink)">Option: Welcome Card am Counter</h3>
+          <p style="color:var(--mist)">Die Welcome Card kann nach dem ersten Besuch am Counter bleiben und wird zum zweiten Besuch wieder ausgehändigt oder kurz kontrolliert. So entsteht beim Wiederkommen automatisch der persönliche Kontakt und das Gespräch nach dem zweiten Kurs.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 18 GOODIE -->
+    <section class="slide mist">
+      <div class="wrap stagger">
+        <span class="eyebrow reveal">Die Geste</span>
+        <h2 class="reveal">Ein Goodie,<br>das bleibt</h2>
+        <p class="lead reveal">Eine kleine Aufmerksamkeit nach dem zweiten Besuch, zum Beispiel Trinkflasche, Socken oder Stoffbeutel.</p>
+        <div class="card reveal" style="margin-top:22px;border-color:var(--gold)">
+          <h3 style="color:var(--gold)">Goodie-Option</h3>
+          <p>Das Goodie wird über die Welcome Card getriggert. Es gilt nur für Welcome-Pass-Kunden, nicht für USC.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 19 MEMBERSHIP-GESPRAECH -->
+    <section class="slide dense">
+      <div class="wrap">
+        <span class="eyebrow reveal">Der Abschluss</span>
+        <h2 class="reveal">Das Membership-Gespräch<br>führt der Welcomer</h2>
+        <ol class="steps stagger">
+          <li class="reveal">Bedarf klären: Wie oft willst du kommen?</li>
+          <li class="reveal">Empfehlen: ein bis zwei Mal Basic, öfter Unlimited</li>
+          <li class="reveal">Die 29 € des Welcome Passes anrechnen</li>
+          <li class="reveal">Direkt abschließen, kein Weiterreichen</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 20 CHURN · ABLAUF -->
+    <section class="slide dense" id="churn-ablauf">
+      <div class="wrap">
+        <span class="tag reveal">Churn-Schutz</span>
+        <h2 class="reveal">Wenn eine<br>Kündigung kommt</h2>
+        <p class="lead reveal">Eine Kündigung ist kein Endpunkt, sondern ein Anruf. Die meisten kündigen aus einem lösbaren Grund.</p>
+        <ol class="steps stagger">
+          <li class="reveal">Innerhalb von 24 Stunden anrufen</li>
+          <li class="reveal">Grund erfragen und zuhören</li>
+          <li class="reveal">Alternative anbieten</li>
+          <li class="reveal">In der Kundenmaske dokumentieren</li>
+          <li class="reveal">Fair verabschieden, Tür offen halten</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 21 CHURN · ALTERNATIVEN -->
+    <section class="slide dense" id="churn-alt">
+      <div class="wrap">
+        <span class="eyebrow reveal" style="color:var(--pink)">Churn-Schutz · Alternativen</span>
+        <h2 class="reveal">Halten statt<br>verlieren</h2>
+        <div class="churn-cols stagger">
+          <div class="alt reveal"><h4>Halten</h4><p>Tarifwechsel oder Pause. Die Mitgliedschaft bleibt.</p><h4>Umwandeln</h4><p>Drop-In-Karte. Kein Abo, die Verbindung bleibt.</p></div>
+          <div class="alt reveal"><h4>Fair verabschieden</h4><p>Grund dokumentieren, Wiedervorlage setzen, Tür offen lassen.</p><h4>Die Regel</h4><p>Jede Kündigung wird angerufen und dokumentiert.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 22 TEAM -->
+    <section class="slide mist dense">
+      <div class="wrap">
+        <span class="eyebrow reveal">Team &amp; Messung</span>
+        <h2 class="reveal">Klare Rollen,<br>klare Zahlen</h2>
+        <div class="grid stagger">
+          <div class="card reveal"><h3>Welcomer</h3><p>Begrüßt, begleitet und schließt ab.</p></div>
+          <div class="card reveal"><h3>Coach</h3><p>Inspiriert und lenkt zum Welcome Desk zurück.</p></div>
+        </div>
+        <ul class="clean stagger" style="margin-top:22px">
+          <li class="reveal">Welcome Pass verkauft</li>
+          <li class="reveal">Erst- und Zweitbesuch erschienen</li>
+          <li class="reveal">Membership abgeschlossen</li>
+          <li class="reveal">Conversionquote und Churn</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 23 OUTRO -->
+    <section class="slide" id="outro">
+      <span class="ghost" data-depth=".16">/</span>
+      <div class="wrap stagger">
+        <h2 class="reveal">Die Membership ist nicht der Verkauf.<br>Sie ist das Ergebnis.</h2>
+        <p class="lead reveal">Keiner kommt rein, ohne dass wir ihn sehen.</p>
+        <h1 class="reveal" style="margin-top:34px;color:var(--pink)">Welcome In</h1>
+      </div>
+    </section>
+
+  </div><!-- /stage -->
+</div><!-- /device -->
+
+<script>
+const device=document.querySelector('.device');
+const stage=document.getElementById('stage');
+const bar=document.getElementById('bar');
+const curEl=document.getElementById('cur');
+const totEl=document.getElementById('tot');
+const slides=[...stage.querySelectorAll('.slide')];
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+totEl.textContent=String(slides.length).padStart(2,'0');
+
+/* ----- Build up / down + Slide-Zähler + Count-up ----- */
+const io=new IntersectionObserver((ents)=>{
+  ents.forEach(en=>{
+    const s=en.target;
+    if(en.intersectionRatio>=.55){
+      s.classList.add('active');
+      curEl.textContent=String(slides.indexOf(s)+1).padStart(2,'0');
+      s.querySelectorAll('[data-to]').forEach(startCount);
+    }else if(en.intersectionRatio<=.3){
+      s.classList.remove('active');
+      s.querySelectorAll('[data-to]').forEach(resetCount);
+    }
+  });
+},{root:stage,threshold:[0,.3,.55,.85]});
+slides.forEach(s=>io.observe(s));
+
+function startCount(el){
+  if(el._run)return; el._run=true;
+  const to=+el.dataset.to,suf=el.dataset.suffix||'';
+  if(reduce){el.textContent=to.toLocaleString('de-DE')+suf;return;}
+  const dur=1400,t0=performance.now();
+  (function tick(now){
+    let k=Math.min((now-t0)/dur,1);k=1-Math.pow(1-k,3);
+    el.textContent=Math.round(to*k).toLocaleString('de-DE')+suf;
+    if(k<1&&el._run)requestAnimationFrame(tick);
+  })(performance.now());
+}
+function resetCount(el){el._run=false;el.textContent='0';}
+
+/* ----- Fortschrittsbalken + Parallax ----- */
+let ticking=false;
+function onScroll(){
+  if(ticking)return;ticking=true;
+  requestAnimationFrame(()=>{
+    const max=stage.scrollHeight-stage.clientHeight;
+    bar.style.width=(max>0?stage.scrollTop/max*100:0)+'%';
+    if(!reduce){
+      const vh=stage.clientHeight,dt=device.getBoundingClientRect().top;
+      slides.forEach(s=>{
+        const ghosts=s.querySelectorAll('[data-depth]');
+        if(!ghosts.length)return;
+        const r=s.getBoundingClientRect();
+        const n=((r.top-dt)+r.height/2-vh/2)/vh;
+        ghosts.forEach(el=>{
+          el.style.transform=`translate(-50%,-50%) translateY(${(-n*(+el.dataset.depth)*vh).toFixed(1)}px)`;
+        });
+      });
+    }
+    ticking=false;
+  });
+}
+stage.addEventListener('scroll',onScroll,{passive:true});
+window.addEventListener('resize',onScroll);
+onScroll();
+
+/* ----- Sanfter Tilt auf Preis-Karten (nur Maus) ----- */
+if(matchMedia('(hover:hover) and (pointer:fine)').matches && !reduce){
+  document.querySelectorAll('.tilt').forEach(card=>{
+    card.addEventListener('pointermove',e=>{
+      const b=card.getBoundingClientRect();
+      const px=(e.clientX-b.left)/b.width-.5,py=(e.clientY-b.top)/b.height-.5;
+      card.style.transform=`perspective(800px) rotateX(${(-py*4).toFixed(2)}deg) rotateY(${(px*5).toFixed(2)}deg) translateY(-4px)`;
+    });
+    card.addEventListener('pointerleave',()=>{card.style.transform='';});
+  });
+}
+</script>
+</body>
+</html>
