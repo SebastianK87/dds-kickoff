@@ -217,6 +217,64 @@ ul.clean li::before{content:"";position:absolute;left:0;top:.5em;width:clamp(9px
   .tilt{transition:transform .25s var(--ease)}
 }
 
+/* ---------- LOGO-MARKE (CI) ---------- */
+.mark{display:inline-block;width:1.55em;height:1em;vertical-align:-.14em;color:var(--pink)}
+.mark svg{width:100%;height:100%;display:block;overflow:visible}
+.bigmark{position:absolute;z-index:0;width:min(120cqw,1500px);height:auto;left:50%;top:50%;
+  transform:translate(-50%,-50%);color:rgba(255,167,226,.05);pointer-events:none;user-select:none}
+
+/* ---------- EINGEBUNDENE ORIGINAL-GRAFIKEN ---------- */
+.shots{display:grid;gap:clamp(12px,1.8cqw,24px);margin-top:clamp(22px,3cqw,40px)}
+.shots.two{grid-template-columns:1fr 1fr}
+.shot{border-radius:clamp(12px,1.6cqw,22px);overflow:hidden;border:1px solid var(--line);
+  background:#0d0d0d;box-shadow:0 18px 50px -22px rgba(0,0,0,.6)}
+.shot img{width:100%;height:auto;display:block}
+.cap{margin-top:clamp(8px,1.1cqw,16px);font-size:clamp(12px,1.5cqw,20px);color:var(--muted);font-style:italic}
+@media (max-width:430px){.shots.two{grid-template-columns:1fr}}
+
+/* ---------- PLAYBOOK-HINWEIS ---------- */
+.pb-note{margin-top:clamp(16px,2.2cqw,30px);display:inline-flex;align-items:center;gap:10px;
+  background:var(--card);border:1px solid rgba(255,167,226,.35);border-radius:999px;
+  padding:clamp(9px,1.2cqw,16px) clamp(16px,2.2cqw,28px);
+  font-size:clamp(12px,1.55cqw,20px);color:var(--mist)}
+.pb-note b{color:var(--pink);font-weight:700}
+
+/* ---------- ORGANIGRAMM ---------- */
+.org{margin-top:clamp(26px,3.4cqw,44px);display:flex;flex-direction:column;align-items:center}
+.org .box{background:var(--card);border:1px solid var(--line);border-radius:14px;
+  padding:clamp(12px,1.8cqw,24px) clamp(18px,2.6cqw,36px);text-align:center;min-width:clamp(160px,32cqw,360px)}
+.org .box.top{border-color:var(--pink);background:linear-gradient(160deg,rgba(255,167,226,.08),transparent)}
+.org .box b{display:block;font-weight:700;font-size:clamp(15px,2cqw,28px);color:#fff}
+.org .box span{font-size:clamp(12px,1.4cqw,20px);color:var(--muted)}
+.org .stem{width:2px;height:clamp(16px,2.2cqw,32px);background:var(--line)}
+.org .row{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.4cqw,20px);width:100%}
+.org .row .box{min-width:0}
+@media (max-width:440px){.org .row{grid-template-columns:1fr;gap:8px}}
+
+/* ---------- PROBLEM -> LOESUNG ---------- */
+.fixrow{display:flex;flex-direction:column;gap:clamp(11px,1.6cqw,20px);margin-top:clamp(24px,3.2cqw,42px)}
+.fixcard{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--pink);
+  border-radius:14px;padding:clamp(14px,2.1cqw,28px) clamp(16px,2.4cqw,32px)}
+.fixcard .pl{display:block;font-weight:700;font-size:clamp(11px,1.35cqw,18px);letter-spacing:.12em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:clamp(5px,.7cqw,10px)}
+.fixcard b{display:block;font-weight:700;font-size:clamp(15px,2cqw,27px);color:#fff;margin-bottom:clamp(4px,.6cqw,9px)}
+.fixcard p{font-size:clamp(13px,1.7cqw,22px);color:var(--muted);line-height:1.42}
+.fixcard p .do{color:var(--pink);font-weight:600}
+
+/* ausgeschlossene USPs (durchgestrichen) */
+.mini.no{flex-direction:column;gap:clamp(9px,1.3cqw,18px);margin-top:clamp(14px,2cqw,26px)}
+.mini.no li{padding-left:clamp(24px,3cqw,40px);color:var(--muted);text-decoration:line-through;
+  text-decoration-color:rgba(154,154,147,.55)}
+.mini.no li::before{content:"\00d7";left:2px;top:0;color:var(--muted);font-weight:700;border:0;width:auto;height:auto;transform:none}
+
+/* geteilter USP-Block in den Memberships */
+.usp-shared{margin-top:clamp(14px,2cqw,24px);background:var(--card);border:1px solid var(--line);
+  border-radius:16px;padding:clamp(16px,2.4cqw,30px) clamp(18px,2.6cqw,34px)}
+.usp-shared .h{font-weight:700;font-size:clamp(12px,1.5cqw,20px);letter-spacing:.1em;text-transform:uppercase;
+  color:var(--pink);margin-bottom:clamp(10px,1.4cqw,18px)}
+.slide.light .usp-shared,.slide.mist .usp-shared{background:#fff;border-color:rgba(0,0,0,.07);box-shadow:0 8px 26px rgba(0,0,0,.05)}
+.slide.light .usp-shared .mini.check li,.slide.mist .usp-shared .mini.check li{color:#55554f}
+
 @media (prefers-reduced-motion:reduce){
   .stage{scroll-snap-type:none}
   .reveal{opacity:1;transform:none;transition:none}
@@ -228,7 +286,7 @@ ul.clean li::before{content:"";position:absolute;left:0;top:.5em;width:clamp(9px
 <div class="device">
   <div id="bar"></div>
   <div class="hud">
-    <span class="brand">D!<b>'</b>S DANCE WORLD</span>
+    <span class="brand"><span class="mark"><svg viewBox="0 0 64 44" aria-hidden="true"><ellipse cx="32" cy="22" rx="30" ry="19" fill="none" stroke="currentColor" stroke-width="4"/><path d="M36 9 L23 24 L31 24 L28 35 L43 19 L34 19 Z" fill="currentColor"/></svg></span> D!<b>'</b>S DANCE WORLD</span>
     <span class="count"><em id="cur">01</em> / <span id="tot">23</span></span>
   </div>
 
@@ -285,6 +343,32 @@ ul.clean li::before{content:"";position:absolute;left:0;top:.5em;width:clamp(9px
       </div>
     </section>
 
+    <!-- NEU: DIE NEUE ROLLE WELCOMER -->
+    <section class="slide" id="welcomer-role">
+      <div class="bigmark"><svg viewBox="0 0 64 44" aria-hidden="true"><ellipse cx="32" cy="22" rx="30" ry="19" fill="none" stroke="currentColor" stroke-width="4"/><path d="M36 9 L23 24 L31 24 L28 35 L43 19 L34 19 Z" fill="currentColor"/></svg></div>
+      <div class="wrap stagger">
+        <span class="tag reveal">Neue Rolle</span>
+        <h1 class="reveal" style="font-size:clamp(46px,13cqw,150px)">Der <span class="pink">Welcomer</span></h1>
+        <p class="lead reveal">Ab jetzt hat jeder Abend ein Gesicht: den Welcomer. Nicht „der am Counter" — sondern verantwortlich dafür, dass kein Gast unbemerkt rein- und wieder rausgeht.</p>
+        <div class="feats stagger" style="margin-top:clamp(18px,2.4cqw,32px)">
+          <div class="feat reveal"><span class="fi">1</span><div><b>Begrüßt</b><span>Aktiv, mit Namen, echtes Hallo. Erkennt jeden Erstbesucher sofort.</span></div></div>
+          <div class="feat reveal"><span class="fi">2</span><div><b>Begleitet</b><span>Vom Welcome Desk zur Class und zurück — mit der Welcome Card als rotem Faden.</span></div></div>
+          <div class="feat reveal"><span class="fi">3</span><div><b>Schließt ab</b><span>Führt das Membership-Gespräch selbst. Kein Weiterreichen, kein Warten.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEU: PLAYBOOK / HANDBUCH -->
+    <section class="slide mist" id="playbook">
+      <div class="wrap stagger">
+        <span class="eyebrow reveal">Dein Nachschlagewerk</span>
+        <h2 class="reveal">Das Welcomer-<br>Playbook</h2>
+        <p class="lead reveal">Der komplette Weg vom ersten Kontakt zum Abo — Schritt für Schritt, mit Formulierungen, Mails und Übergaben. Ein Handbuch zum Nachlesen, kein Auswendiglernen.</p>
+        <p class="lead reveal">Was auf den nächsten Seiten kommt, sind <b style="color:var(--ink2)">Auszüge</b> daraus.</p>
+        <span class="pb-note reveal"><b>Version 1</b>&nbsp;— das Playbook wächst in den nächsten Wochen weiter.</span>
+      </div>
+    </section>
+
     <!-- 6 WARUM WELCOME PASS -->
     <section class="slide dense">
       <div class="wrap">
@@ -311,7 +395,7 @@ ul.clean li::before{content:"";position:absolute;left:0;top:.5em;width:clamp(9px
           <div class="wp-amt"><span class="num" data-to="29" data-suffix=" €">0</span></div>
           <div class="wp-tag">2 Classes, ein echtes Kennenlernen.</div>
           <ul class="mini">
-            <li>2 Check-ins</li><li>10 Tage gültig</li><li>ohne Abo, ohne Bindung</li>
+            <li>2 Check-ins</li><li>10 Tage gültig, endet automatisch</li><li>ohne Abo, ohne Bindung</li>
           </ul>
         </div>
         <div class="anrech reveal">Die 29 € werden voll auf deine Membership angerechnet.</div>
@@ -323,26 +407,28 @@ ul.clean li::before{content:"";position:absolute;left:0;top:.5em;width:clamp(9px
       <div class="wrap">
         <span class="eyebrow reveal" style="color:var(--gold)">Preise &amp; Angebote · 02</span>
         <h2 class="reveal">Zwei Memberships.<br>Mehr nicht.</h2>
-        <div class="stagger" style="margin-top:26px">
+        <div class="stagger" style="margin-top:clamp(20px,2.6cqw,36px)">
           <div class="tier tilt reveal">
             <span class="pname">Basic</span>
             <div class="amt">55 €<small>/ Monat</small></div>
             <div class="terms">im Jahresabo · 65 € monatlich</div>
-            <ul class="mini check">
-              <li>8 Check-ins pro Monat</li>
-              <li>Alle Standard-Classes</li>
-              <li>30 Tage Kündigungsfrist</li>
-            </ul>
+            <ul class="mini check"><li>8 Check-ins pro Monat</li></ul>
           </div>
           <div class="tier reco tilt reveal">
             <span class="reco-tag">Empfohlen</span>
             <span class="pname">Unlimited</span>
             <div class="amt">69 €<small>/ Monat</small></div>
             <div class="terms">im Jahresabo · 79 € monatlich</div>
+            <ul class="mini check"><li>Unbegrenzt alle Classes</li></ul>
+          </div>
+          <div class="usp-shared reveal">
+            <div class="h">In Basic &amp; Unlimited enthalten</div>
             <ul class="mini check">
-              <li>Unbegrenzt alle Classes</li>
-              <li>Jederzeit, ohne Limit</li>
-              <li>30 Tage Kündigungsfrist</li>
+              <li>Alle Stile: Hip Hop, Heels, Pole und mehr</li>
+              <li>Über 40 Kurse pro Woche, 30 Coaches</li>
+              <li>Zugang zur Functional Fitness Area</li>
+              <li>Priorität bei Kursbuchung &amp; Vorab-Check-in</li>
+              <li>Kostenloses Wasser an der Refill-Station</li>
             </ul>
           </div>
         </div>
@@ -351,7 +437,7 @@ ul.clean li::before{content:"";position:absolute;left:0;top:.5em;width:clamp(9px
     </section>
 
     <!-- 9 PREISE · DROP-INS -->
-    <section class="slide light">
+    <section class="slide light dense">
       <div class="wrap">
         <span class="eyebrow reveal" style="color:var(--gold)">Preise &amp; Angebote · 03</span>
         <h2 class="reveal">Drop-In-Karten</h2>
@@ -360,6 +446,18 @@ ul.clean li::before{content:"";position:absolute;left:0;top:.5em;width:clamp(9px
           <div class="drop reveal"><div class="d-amt">69 €</div><div class="d-n">3er-Karte</div><div class="d-t">2 Monate gültig</div></div>
           <div class="drop reveal"><div class="d-amt">99 €</div><div class="d-n">5er-Karte</div><div class="d-t">3 Monate gültig</div></div>
           <div class="drop reveal"><div class="d-amt">179 €</div><div class="d-n">10er-Karte</div><div class="d-t">6 Monate gültig</div></div>
+        </div>
+        <div class="usp-shared reveal">
+          <div class="h">In jeder Drop-In-Karte enthalten</div>
+          <ul class="mini check">
+            <li>Alle Stile: Hip Hop, Heels, Pole und mehr</li>
+            <li>Über 40 Kurse pro Woche, 30 Coaches</li>
+            <li>Kostenloses Wasser an der Refill-Station</li>
+          </ul>
+          <ul class="mini no">
+            <li>Zugang zur Functional Fitness Area</li>
+            <li>Bevorzugter Check-in</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -389,7 +487,7 @@ ul.clean li::before{content:"";position:absolute;left:0;top:.5em;width:clamp(9px
         <div class="grid stagger">
           <div class="card reveal"><span class="num-badge">01</span><h3>Welcome Pass</h3><p>29 €, zwei Check-ins. Der geführte Einstieg.</p></div>
           <div class="card reveal"><span class="num-badge">02</span><h3>Drop-In-Karten</h3><p>3er, 5er, 10er. Flexibel ohne Abo.</p></div>
-          <div class="card reveal"><span class="num-badge">03</span><h3>USC-Member</h3><p>Sind jetzt Teil der Journey. Im Testlauf bekommen sie ebenfalls den Welcome Pass.</p></div>
+          <div class="card reveal"><span class="num-badge">03</span><h3>USC-Member</h3><p>UrbanSports-Gäste sind jetzt Teil der Journey. Sie bekommen die <b style="color:var(--pink)">Welcome Card</b> und werden wie Erstbesucher begleitet.</p></div>
           <div class="card reveal"><span class="num-badge">04</span><h3>Walk-In</h3><p>Wird direkt am Counter beraten und in den Welcome Pass geführt.</p></div>
         </div>
       </div>
@@ -438,6 +536,19 @@ ul.clean li::before{content:"";position:absolute;left:0;top:.5em;width:clamp(9px
       </div>
     </section>
 
+    <!-- NEU: WELCOME CARD ALS WERKZEUG -->
+    <section class="slide dense" id="welcome-card">
+      <div class="wrap">
+        <span class="eyebrow reveal">Das Werkzeug</span>
+        <h2 class="reveal">Die Welcome Card<br>verbindet alles</h2>
+        <p class="lead reveal">Der rote Faden: Sie begleitet den Gast vom Welcome Desk zum Coach und zurück — und macht für alle sichtbar, wer heute zum ersten Mal da ist.</p>
+        <div class="shots two stagger">
+          <div class="reveal"><div class="shot"><img src="img/wc-front.png" alt="Welcome Card Vorderseite" loading="lazy"></div><div class="cap">Vorderseite · 1. &amp; 2. Besuch</div></div>
+          <div class="reveal"><div class="shot"><img src="img/wc-back.png" alt="Welcome Card Rückseite" loading="lazy"></div><div class="cap">Rückseite · Name, Telefon, Class, Coach</div></div>
+        </div>
+      </div>
+    </section>
+
     <!-- 15 COACH -->
     <section class="slide mist dense">
       <div class="wrap">
@@ -459,6 +570,7 @@ ul.clean li::before{content:"";position:absolute;left:0;top:.5em;width:clamp(9px
         <ul class="clean reveal" style="margin-top:24px">
           <li>Wie hat dir die Class gefallen?</li>
           <li>War der Style das Richtige für dich?</li>
+          <li>Hat dir der Coach gefallen?</li>
           <li>Welchen Style möchtest du als Nächstes ausprobieren?</li>
         </ul>
         <p class="lead reveal">Kein Druck, kein Verkauf. Erst Beziehung, dann Membership. Immer die nächste Class empfehlen.</p>
@@ -548,6 +660,72 @@ ul.clean li::before{content:"";position:absolute;left:0;top:.5em;width:clamp(9px
           <li class="reveal">Membership abgeschlossen</li>
           <li class="reveal">Conversionquote und Churn</li>
         </ul>
+      </div>
+    </section>
+
+    <!-- NEU: STATUS QUO INTRO -->
+    <section class="slide" id="statusquo">
+      <div class="bigmark"><svg viewBox="0 0 64 44" aria-hidden="true"><ellipse cx="32" cy="22" rx="30" ry="19" fill="none" stroke="currentColor" stroke-width="4"/><path d="M36 9 L23 24 L31 24 L28 35 L43 19 L34 19 Z" fill="currentColor"/></svg></div>
+      <div class="wrap stagger">
+        <span class="tag reveal">Status quo</span>
+        <h2 class="reveal">Damit das greift:<br>Klartext.</h2>
+        <p class="lead reveal">Der Prozess steht. Aber drumherum fehlt noch Struktur. Vier Dinge bremsen uns gerade — und jedes davon ist lösbar.</p>
+      </div>
+    </section>
+
+    <!-- NEU: ORGANIGRAMM -->
+    <section class="slide dense" id="org">
+      <div class="wrap">
+        <span class="eyebrow reveal">Problem 1 · Organisation</span>
+        <h2 class="reveal">Es fehlt ein klares<br>Organigramm</h2>
+        <p class="lead reveal">Wer entscheidet was? Wer ist abends verantwortlich? Solange das offen ist, bleibt jede Aufgabe an irgendwem hängen. Wir brauchen klare Zuständigkeiten.</p>
+        <div class="org stagger">
+          <div class="box top reveal"><b>Studioleitung</b><span>Strategie &amp; Entscheidung</span></div>
+          <div class="stem reveal"></div>
+          <div class="row">
+            <div class="box reveal"><b>Welcomer</b><span>Abend &amp; Abschluss</span></div>
+            <div class="box reveal"><b>Coaches</b><span>Class &amp; Rückführung</span></div>
+            <div class="box reveal"><b>Technik &amp; Support</b><span>Erreichbar auf Abruf</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEU: ABEND-BETRIEB -->
+    <section class="slide dense" id="abendbetrieb">
+      <div class="wrap">
+        <span class="eyebrow reveal">Problem 2 · Abend-Betrieb</span>
+        <h2 class="reveal">Der Welcomer trägt<br>abends zu viel allein</h2>
+        <div class="fixrow stagger">
+          <div class="fixcard reveal"><span class="pl">WhatsApp als Ticket-System</span><b>Anfragen laufen unstrukturiert rein</b><p>Es wird chaotisch. <span class="do">Klare Regeln: wer übernimmt wann, was ist erledigt, was bleibt offen.</span></p></div>
+          <div class="fixcard reveal"><span class="pl">Technik</span><b>Welcomer löst nebenbei Technik-Probleme</b><p>Das kostet genau die Zeit, die der Gast braucht. <span class="do">Telefonliste mit Techniker &amp; Backup — ein Anruf, Problem abgegeben.</span></p></div>
+          <div class="fixcard reveal"><span class="pl">Verantwortung</span><b>Abends hängt alles an einer Person</b><p><span class="do">Klare Zuständigkeiten und eine erreichbare Hilfe nehmen den Druck raus.</span></p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEU: PLANUNG -->
+    <section class="slide mist dense" id="planung">
+      <div class="wrap">
+        <span class="eyebrow reveal">Problem 3 · Planung</span>
+        <h2 class="reveal">Agieren statt<br>reagieren</h2>
+        <p class="lead reveal">Vieles wird zu spät angeschoben — der Ferienplan ist noch nicht final, Events kommen viel zu kurzfristig. Dieser Stress ist vermeidbar.</p>
+        <div class="fixrow stagger">
+          <div class="fixcard reveal"><span class="pl">Jetzt</span><b>Dringendes Meeting: Jahresplanung bis Dezember</b><p><span class="do">Ferien, Events, Kampagnen, Kurse — einmal sauber durchplanen.</span></p></div>
+          <div class="fixcard reveal"><span class="pl">Der Effekt</span><b>Langfristige Planung entspannt ungemein</b><p>Mehr Klarheit, weniger Feuerlöschen. <span class="do">Wir entscheiden vorne, statt hinten zu reagieren.</span></p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEU: MARKETING -->
+    <section class="slide dense" id="marketing">
+      <div class="wrap">
+        <span class="eyebrow reveal">Problem 4 · Kommunikation</span>
+        <h2 class="reveal">Marketing muss<br>sauber aufsetzen</h2>
+        <div class="fixrow stagger">
+          <div class="fixcard reveal"><span class="pl">Awareness</span><b>Die Welcome-Pass-Kampagne muss konvertieren</b><p>Reichweite allein bringt nichts. <span class="do">Klares Ziel: vom Pass in die Membership — und messen, ob es klappt.</span></p></div>
+          <div class="fixcard reveal"><span class="pl">Empfehlung</span><b>Ein Kundenmagazin schafft Klarheit</b><p>Von der Grafik gestaltet, als feste Informationslage für Gäste und Team. <span class="do">Themen vorausplanen, statt jede Woche neu improvisieren.</span></p></div>
+        </div>
       </div>
     </section>
 
