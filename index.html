@@ -275,10 +275,46 @@ ul.clean li::before{content:"";position:absolute;left:0;top:.5em;width:clamp(9px
 .slide.light .usp-shared,.slide.mist .usp-shared{background:#fff;border-color:rgba(0,0,0,.07);box-shadow:0 8px 26px rgba(0,0,0,.05)}
 .slide.light .usp-shared .mini.check li,.slide.mist .usp-shared .mini.check li{color:#55554f}
 
+/* ---------- FUNNEL (Gesamtübersicht) ---------- */
+.funnel{display:flex;flex-direction:column;margin-top:clamp(18px,2.6cqw,36px)}
+.fn{display:grid;grid-template-columns:clamp(22px,3cqw,40px) 1fr;gap:clamp(11px,1.5cqw,20px);align-items:stretch}
+.fn .rail{position:relative;display:flex;justify-content:center}
+.fn .rail::before{content:"";position:absolute;top:0;bottom:0;width:2px;background:var(--line)}
+.fn:first-child .rail::before{top:50%}
+.fn:last-child .rail::before{bottom:50%}
+.fn .dot{position:relative;align-self:center;width:clamp(12px,1.5cqw,18px);height:clamp(12px,1.5cqw,18px);
+  border-radius:50%;background:var(--ink);border:2px solid var(--pink);z-index:1}
+.fn .body{padding:clamp(6px,.9cqw,12px) 0;display:flex;align-items:center;gap:clamp(8px,1.1cqw,16px);flex-wrap:wrap}
+.fn .t{font-weight:600;font-size:clamp(14px,1.85cqw,25px);color:var(--mist);line-height:1.2}
+.fn.phase{margin-top:clamp(6px,.8cqw,12px)}
+.fn.phase .dot{width:clamp(15px,1.9cqw,24px);height:clamp(15px,1.9cqw,24px);background:var(--pink)}
+.fn.phase .t{font-family:var(--disp);font-weight:900;text-transform:uppercase;color:#fff;
+  font-size:clamp(16px,2.2cqw,30px);letter-spacing:.01em}
+.fn.win .dot{background:#fff;border-color:#fff}
+.pill{font-weight:700;font-size:clamp(10px,1.3cqw,16px);letter-spacing:.07em;text-transform:uppercase;
+  border-radius:999px;padding:clamp(3px,.5cqw,7px) clamp(9px,1.2cqw,15px);white-space:nowrap}
+.pill.mail{background:var(--pink);color:var(--ink2)}
+.pill.card{background:var(--gold);color:#fff}
+.pill.win{background:#fff;color:var(--ink2)}
+
+/* Zoom-in beim Scrollen (per JS gesteuert) */
+[data-zoom]{transform-origin:center center;will-change:transform,opacity}
+
+/* Mail-Karten */
+.mailcard{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--pink);
+  border-radius:14px;padding:clamp(15px,2.2cqw,30px) clamp(17px,2.5cqw,34px)}
+.mailcard .mh{display:flex;align-items:baseline;gap:clamp(8px,1.2cqw,16px);margin-bottom:clamp(7px,1cqw,14px);flex-wrap:wrap}
+.mailcard .mn{font-family:var(--disp);font-weight:900;text-transform:uppercase;color:#fff;font-size:clamp(16px,2.1cqw,28px)}
+.mailcard .when{font-size:clamp(11px,1.35cqw,18px);font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--gold)}
+.mailcard ul{list-style:none;display:flex;flex-direction:column;gap:clamp(5px,.8cqw,11px)}
+.mailcard li{position:relative;padding-left:clamp(17px,2.1cqw,28px);font-size:clamp(13px,1.7cqw,22px);color:var(--muted);line-height:1.35}
+.mailcard li::before{content:"";position:absolute;left:2px;top:.55em;width:7px;height:7px;border-radius:50%;background:var(--pink)}
+
 @media (prefers-reduced-motion:reduce){
   .stage{scroll-snap-type:none}
   .reveal{opacity:1;transform:none;transition:none}
   .scrollcue .dot{animation:none}
+  [data-zoom]{transform:none!important;opacity:1!important}
 }
 </style>
 </head>
@@ -364,7 +400,7 @@ ul.clean li::before{content:"";position:absolute;left:0;top:.5em;width:clamp(9px
         <span class="eyebrow reveal">Dein Nachschlagewerk</span>
         <h2 class="reveal">Das Welcomer-<br>Playbook</h2>
         <p class="lead reveal">Der komplette Weg vom ersten Kontakt zum Abo — Schritt für Schritt, mit Formulierungen, Mails und Übergaben. Ein Handbuch zum Nachlesen, kein Auswendiglernen.</p>
-        <p class="lead reveal">Was auf den nächsten Seiten kommt, sind <b style="color:var(--ink2)">Auszüge</b> daraus.</p>
+        <p class="lead reveal">Gleich als <b style="color:var(--ink2)">Funnel</b> auf einen Blick — danach komplett zum Nachlesen.</p>
         <span class="pb-note reveal"><b>Version 1</b>&nbsp;— das Playbook wächst in den nächsten Wochen weiter.</span>
       </div>
     </section>
@@ -462,20 +498,94 @@ ul.clean li::before{content:"";position:absolute;left:0;top:.5em;width:clamp(9px
       </div>
     </section>
 
-    <!-- 10 JOURNEY -->
-    <section class="slide dense">
+    <!-- FUNNEL · GESAMTÜBERSICHT -->
+    <section class="slide dense" id="funnel">
       <div class="wrap">
-        <span class="eyebrow reveal">Die Customer Journey</span>
-        <h2 class="reveal">So läuft der Weg<br>vom Kauf bis zum Abo</h2>
-        <div class="flow stagger">
-          <div class="ph reveal"><b>Phase 1 · Kauf &amp; Vorfreude</b><span>Buchung, Willkommens-Mail, Infos zum Besuch</span></div>
-          <div class="arrow reveal">&darr;</div>
-          <div class="ph reveal"><b>Phase 2 · Erster Besuch</b><span>Welcome Desk, First Class Card, Coach, Nachgespräch</span></div>
-          <div class="arrow reveal">&darr;</div>
-          <div class="ph reveal"><b>Phase 3 · Zweiter Besuch</b><span>Empfang mit Vorwissen, Goodie, Membership-Gespräch</span></div>
-          <div class="arrow reveal">&darr;</div>
-          <div class="ph reveal"><b>Abschluss</b><span>Basic oder Unlimited, sonst Telefon-Follow-up</span></div>
+        <span class="eyebrow reveal">Der Funnel</span>
+        <h2 class="reveal">Von der Buchung<br>bis zum Abo</h2>
+        <p class="lead reveal">Der ganze Weg auf einen Blick — inklusive, wann welche Mail rausgeht und wann die Welcome Card greift. Danach zoomen wir Phase für Phase rein.</p>
+        <div class="funnel stagger">
+          <div class="fn phase reveal"><div class="rail"><span class="dot"></span></div><div class="body"><span class="t">Phase 1 · Kauf &amp; Vorfreude</span></div></div>
+          <div class="fn reveal"><div class="rail"><span class="dot"></span></div><div class="body"><span class="t">Buchung über Eversports</span></div></div>
+          <div class="fn reveal"><div class="rail"><span class="dot"></span></div><div class="body"><span class="t">Mail 1 · Willkommen</span><span class="pill mail">direkt</span></div></div>
+          <div class="fn reveal"><div class="rail"><span class="dot"></span></div><div class="body"><span class="t">Mail 2 · Infos zum Besuch</span><span class="pill mail">~12 h vorher</span></div></div>
+          <div class="fn phase reveal"><div class="rail"><span class="dot"></span></div><div class="body"><span class="t">Phase 2 · Erster Besuch</span></div></div>
+          <div class="fn reveal"><div class="rail"><span class="dot"></span></div><div class="body"><span class="t">Welcome Desk · aktiv begrüßen</span><span class="pill card">Welcome Card</span></div></div>
+          <div class="fn reveal"><div class="rail"><span class="dot"></span></div><div class="body"><span class="t">Coach inspiriert &amp; lenkt zurück</span></div></div>
+          <div class="fn reveal"><div class="rail"><span class="dot"></span></div><div class="body"><span class="t">Nachgespräch am Desk</span></div></div>
+          <div class="fn reveal"><div class="rail"><span class="dot"></span></div><div class="body"><span class="t">Mail 3 · nach der Class</span><span class="pill mail">Tag danach</span></div></div>
+          <div class="fn phase reveal"><div class="rail"><span class="dot"></span></div><div class="body"><span class="t">Phase 3 · Zweiter Besuch</span></div></div>
+          <div class="fn reveal"><div class="rail"><span class="dot"></span></div><div class="body"><span class="t">Empfang mit Vorwissen</span><span class="pill card">Welcome Card</span></div></div>
+          <div class="fn reveal"><div class="rail"><span class="dot"></span></div><div class="body"><span class="t">Kleine Überraschung</span></div></div>
+          <div class="fn reveal"><div class="rail"><span class="dot"></span></div><div class="body"><span class="t">Membership-Gespräch</span></div></div>
+          <div class="fn phase win reveal"><div class="rail"><span class="dot"></span></div><div class="body"><span class="t">Abschluss</span><span class="pill win">29 € angerechnet</span></div></div>
+          <div class="fn reveal"><div class="rail"><span class="dot"></span></div><div class="body"><span class="t">Abo: Basic oder Unlimited</span></div></div>
+          <div class="fn reveal"><div class="rail"><span class="dot"></span></div><div class="body"><span class="t">sonst: Mail 4 + Telefon</span><span class="pill mail">24–48 h</span></div></div>
         </div>
+      </div>
+    </section>
+
+    <!-- FUNNEL · ZOOM PHASE 1 -->
+    <section class="slide" id="fz1">
+      <div class="wrap stagger" data-zoom>
+        <span class="eyebrow reveal">Funnel · Phase 1 / 4</span>
+        <h2 class="reveal">Kauf &amp; Vorfreude</h2>
+        <p class="lead reveal">Zwei Mails bereiten den ersten Besuch vor — die Beziehung beginnt vor der Tür.</p>
+        <div class="grid stagger" style="margin-top:clamp(20px,2.6cqw,36px)">
+          <div class="mailcard reveal"><div class="mh"><span class="mn">Mail 1 · Willkommen</span><span class="when">direkt nach Buchung</span></div><ul><li>Vorfreude wecken</li><li>Community spürbar machen</li><li>Erste Beziehung aufbauen</li></ul></div>
+          <div class="mailcard reveal"><div class="mh"><span class="mn">Mail 2 · Bald geht's los</span><span class="when">~12 h vorher</span></div><ul><li>10–15 Min vorher da sein</li><li>Beim Welcome-Team melden</li><li>Adresse, Aufzug, 3. Etage</li><li>Kleidung, Wechselschuhe, Flasche</li></ul></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FUNNEL · ZOOM PHASE 2 -->
+    <section class="slide" id="fz2">
+      <div class="wrap stagger" data-zoom>
+        <span class="eyebrow reveal">Funnel · Phase 2 / 4</span>
+        <h2 class="reveal">Erster Besuch</h2>
+        <p class="lead reveal">Hier greift die <b style="color:var(--gold)">Welcome Card</b> — vom Welcome Desk in die Class und zurück.</p>
+        <ol class="steps stagger">
+          <li class="reveal">Welcome Desk: aktiv begrüßen &amp; Welcome Card ausfüllen</li>
+          <li class="reveal">Coach inspiriert und schickt zum Desk zurück</li>
+          <li class="reveal">Nachgespräch: vier Fragen, kein Verkauf</li>
+          <li class="reveal">Mail 3 am Tag nach der Class</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- FUNNEL · ZOOM PHASE 3 -->
+    <section class="slide" id="fz3">
+      <div class="wrap stagger" data-zoom>
+        <span class="eyebrow reveal">Funnel · Phase 3 / 4</span>
+        <h2 class="reveal">Zweiter Besuch</h2>
+        <ol class="steps stagger">
+          <li class="reveal">Empfang mit Vorwissen — „Schön, dass du wieder da bist."</li>
+          <li class="reveal">Kleine Überraschung am Welcome Desk</li>
+          <li class="reveal">Membership-Gespräch — der Welcomer führt</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- FUNNEL · ZOOM PHASE 4 -->
+    <section class="slide" id="fz4">
+      <div class="wrap stagger" data-zoom>
+        <span class="eyebrow reveal">Funnel · Phase 4 / 4</span>
+        <h2 class="reveal">Abschluss</h2>
+        <div class="grid stagger" style="margin-top:clamp(20px,2.6cqw,36px)">
+          <div class="card reveal" style="border-color:var(--pink)"><h3 style="color:var(--pink)">Sofort: Abo</h3><p>Basic oder Unlimited. Die 29 € des Welcome Passes werden angerechnet.</p></div>
+          <div class="card reveal"><h3>Sonst: Nachfassen</h3><p>Mail 4 + Telefon, 24–48 h nach dem Besuch. Freundlich, mit Bedarf klären.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLAYBOOK · KOMPLETT (Auftakt) -->
+    <section class="slide mist" id="playbook-full">
+      <div class="bigmark"><svg viewBox="0 0 64 44" aria-hidden="true"><ellipse cx="32" cy="22" rx="30" ry="19" fill="none" stroke="currentColor" stroke-width="4"/><path d="M36 9 L23 24 L31 24 L28 35 L43 19 L34 19 Z" fill="currentColor"/></svg></div>
+      <div class="wrap stagger">
+        <span class="tag reveal">Playbook</span>
+        <h2 class="reveal">Jetzt komplett:<br>Schritt für Schritt</h2>
+        <p class="lead reveal">Ab hier liest du das ganze Playbook der Reihe nach — jede Phase, jede Übergabe, jede Formulierung. Dein Nachschlagewerk für den Abend.</p>
+        <span class="pb-note reveal"><b>Version 1</b>&nbsp;— wächst in den nächsten Wochen weiter.</span>
       </div>
     </section>
 
@@ -489,6 +599,20 @@ ul.clean li::before{content:"";position:absolute;left:0;top:.5em;width:clamp(9px
           <div class="card reveal"><span class="num-badge">02</span><h3>Drop-In-Karten</h3><p>3er, 5er, 10er. Flexibel ohne Abo.</p></div>
           <div class="card reveal"><span class="num-badge">03</span><h3>USC-Member</h3><p>UrbanSports-Gäste sind jetzt Teil der Journey. Sie bekommen die <b style="color:var(--pink)">Welcome Card</b> und werden wie Erstbesucher begleitet.</p></div>
           <div class="card reveal"><span class="num-badge">04</span><h3>Walk-In</h3><p>Wird direkt am Counter beraten und in den Welcome Pass geführt.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLAYBOOK · DIE 4 MAILS -->
+    <section class="slide dense" id="mails">
+      <div class="wrap">
+        <span class="eyebrow reveal">Playbook · Die Mails</span>
+        <h2 class="reveal">Vier Mails,<br>klare Taktung</h2>
+        <div class="grid stagger" style="margin-top:clamp(20px,2.6cqw,36px)">
+          <div class="mailcard reveal"><div class="mh"><span class="mn">Mail 1</span><span class="when">direkt nach Buchung</span></div><ul><li>Willkommen, Vorfreude, Community spürbar machen</li></ul></div>
+          <div class="mailcard reveal"><div class="mh"><span class="mn">Mail 2</span><span class="when">~12 h vor Termin</span></div><ul><li>Anreise, 10–15 Min vorher da, beim Welcome-Team melden</li></ul></div>
+          <div class="mailcard reveal"><div class="mh"><span class="mn">Mail 3</span><span class="when">am Tag nach der Class</span></div><ul><li>Begeisterung verstärken, 2. Check-in sichern, 29 € platzieren</li></ul></div>
+          <div class="mailcard reveal"><div class="mh"><span class="mn">Mail 4</span><span class="when">nur ohne Abschluss</span></div><ul><li>Conversion: Basic ab 55 €, Unlimited ab 69 €, Beratung anbieten</li></ul></div>
         </div>
       </div>
     </section>
@@ -812,11 +936,17 @@ function onScroll(){
       const vh=stage.clientHeight,dt=device.getBoundingClientRect().top;
       slides.forEach(s=>{
         const ghosts=s.querySelectorAll('[data-depth]');
-        if(!ghosts.length)return;
+        const zooms=s.querySelectorAll('[data-zoom]');
+        if(!ghosts.length&&!zooms.length)return;
         const r=s.getBoundingClientRect();
         const n=((r.top-dt)+r.height/2-vh/2)/vh;
         ghosts.forEach(el=>{
           el.style.transform=`translate(-50%,-50%) translateY(${(-n*(+el.dataset.depth)*vh).toFixed(1)}px)`;
+        });
+        zooms.forEach(el=>{
+          const a=Math.min(Math.abs(n),1);
+          el.style.transform=`scale(${(1-0.16*a).toFixed(3)})`;
+          el.style.opacity=(1-0.55*a).toFixed(2);
         });
       });
     }
