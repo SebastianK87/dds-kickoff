@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>WELCOME IN · D!'s Dance World Kick-off · v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1c1c1c; --ink2:#272727; --mist:#E1E2DC; --pink:#FFA7E2; --gold:#B29261;
+  --paper:#F4F3EE; --muted:#9a9a93; --card:rgba(255,255,255,.045); --line:rgba(255,255,255,.12);
+  --disp:'Queering Heavy Extended','Archivo',system-ui,sans-serif;
+  --body:'Overused Grotesk','Inter',system-ui,sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{min-height:100svh;background:#0b0b0c;color:var(--mist);font-family:var(--body);
+  -webkit-font-smoothing:antialiased;overflow:hidden;display:flex;align-items:center;justify-content:center}
+body::before{content:"";position:fixed;inset:-20%;z-index:0;pointer-events:none;
+  background:radial-gradient(60% 50% at 70% 12%,rgba(255,167,226,.16),transparent 60%),
+    radial-gradient(50% 40% at 20% 90%,rgba(178,146,97,.12),transparent 60%);filter:blur(8px)}
+
+/* ---------- 9:16 DEVICE ---------- */
+.device{position:relative;z-index:1;overflow:hidden;width:100vw;height:100svh;background:var(--ink)}
+@media (min-aspect-ratio:1/1){
+  :root{--dh:calc(100svh - 36px)}
+  body{padding:18px}
+  .device{height:var(--dh);width:calc(var(--dh) * 9 / 16);border-radius:30px;
+    box-shadow:0 50px 130px -25px rgba(0,0,0,.75),0 0 0 1px rgba(255,255,255,.07),inset 0 0 0 1px rgba(255,255,255,.02)}
+}
+/* HUD */
+.hud{position:absolute;top:0;left:0;right:0;z-index:6;pointer-events:none;
+  padding:18px 22px 0;display:flex;align-items:center;justify-content:space-between;
+  font-size:clamp(10px,1.25cqw,17px);letter-spacing:.18em;text-transform:uppercase;color:rgba(225,226,220,.55);font-weight:700}
+.hud .brand{color:var(--mist);display:inline-flex;align-items:center;gap:.5em}
+.hud .brand b{color:var(--pink)}
+.hud .chapind{font-variant-numeric:tabular-nums;text-align:right}
+.hud .chapind em{color:var(--pink);font-style:normal}
+#bar{position:absolute;top:0;left:0;height:3px;width:0;z-index:7;
+  background:linear-gradient(90deg,var(--pink),var(--gold));transition:width .12s linear}
+
+/* ---------- STAGE ---------- */
+.stage{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;container-type:inline-size;
+  scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.stage::-webkit-scrollbar{display:none}
+.slide{position:relative;min-height:100%;display:flex;flex-direction:column;align-items:center;
+  padding:clamp(84px,13cqw,190px) clamp(22px,5cqw,72px) clamp(64px,9cqw,150px);border-top:1px solid var(--line);overflow:hidden}
+.slide:first-child{border-top:0}
+.slide.dense{padding-top:clamp(90px,14cqw,200px)}
+.wrap{width:100%;max-width:min(94cqw,1040px);margin:auto;position:relative;z-index:2}
+.slide.light{background:var(--paper);color:var(--ink2);border-top:1px solid rgba(0,0,0,.08)}
+.slide.mist{background:var(--mist);color:var(--ink2);border-top:1px solid rgba(0,0,0,.08)}
+
+/* ---------- TYPO ---------- */
+.eyebrow{font-family:var(--body);font-weight:700;font-size:clamp(11px,1.6cqw,19px);letter-spacing:.24em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:clamp(16px,2.4cqw,30px);display:block}
+h1{font-family:var(--disp);font-weight:900;font-size:clamp(50px,15cqw,170px);line-height:.88;letter-spacing:-.01em;text-transform:uppercase;color:#fff}
+h1 .pink{color:var(--pink)}
+h2{font-family:var(--disp);font-weight:900;font-size:clamp(27px,7.8cqw,92px);line-height:1.02;letter-spacing:-.01em;color:#fff}
+.slide.light h2,.slide.mist h2{color:var(--ink2)}
+.lead{font-size:clamp(16px,3.2cqw,34px);line-height:1.5;color:var(--muted);margin-top:clamp(16px,2.4cqw,30px);max-width:42ch}
+.slide.light .lead,.slide.mist .lead{color:#55554f}
+.ko-sub{font-size:clamp(17px,4cqw,40px);color:var(--mist);margin-top:clamp(22px,3.2cqw,40px);font-weight:500;max-width:30ch}
+.big{font-family:var(--disp);font-weight:900;font-size:clamp(60px,18cqw,260px);line-height:.82;color:var(--pink);letter-spacing:-.02em;position:relative;z-index:2;display:inline-block;white-space:nowrap;max-width:100%}
+.tag{display:inline-block;font-family:var(--body);font-weight:700;font-size:clamp(11px,1.5cqw,18px);letter-spacing:.16em;text-transform:uppercase;color:var(--pink);border:1px solid var(--pink);border-radius:999px;padding:6px 15px;margin-bottom:clamp(20px,2.8cqw,34px)}
+
+/* ---------- KAPITEL-KARTEN ---------- */
+.chapkick{font-family:var(--body);font-weight:700;font-size:clamp(11px,1.5cqw,19px);letter-spacing:.3em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:clamp(8px,1.1cqw,16px)}
+.chapnum{font-family:var(--disp);font-weight:900;font-size:clamp(96px,34cqw,340px);line-height:.8;color:var(--pink);letter-spacing:-.03em;display:block}
+.chaptitle{font-family:var(--disp);font-weight:900;text-transform:uppercase;font-size:clamp(40px,12cqw,150px);line-height:.9;color:#fff;letter-spacing:-.01em;margin-top:clamp(2px,.4cqw,8px)}
+
+.ghost{position:absolute;z-index:0;font-family:var(--disp);font-weight:900;line-height:.8;color:rgba(255,167,226,.05);
+  font-size:clamp(180px,70cqw,420px);letter-spacing:-.04em;top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;user-select:none}
+
+/* ---------- LOGO-MARKE ---------- */
+.mark{display:inline-block;width:1.55em;height:1em;vertical-align:-.14em;color:var(--pink)}
+.mark svg{width:100%;height:100%;display:block;overflow:visible}
+.bigmark{position:absolute;z-index:0;width:min(120cqw,1500px);height:auto;left:50%;top:50%;transform:translate(-50%,-50%);color:rgba(255,167,226,.05);pointer-events:none;user-select:none}
+
+/* ---------- CARDS / FEATURES ---------- */
+.grid{display:grid;gap:clamp(11px,1.6cqw,20px);margin-top:clamp(26px,3.4cqw,44px)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:clamp(18px,3cqw,38px) clamp(20px,3.3cqw,42px)}
+.slide.light .card,.slide.mist .card{background:#fff;border-color:rgba(0,0,0,.07);box-shadow:0 8px 26px rgba(0,0,0,.05)}
+.card h3{font-family:var(--body);font-weight:700;font-size:clamp(16px,2.1cqw,28px);color:inherit;margin-bottom:clamp(6px,.9cqw,12px)}
+.card p{font-size:clamp(14px,1.85cqw,24px);line-height:1.42;color:var(--muted)}
+.slide.light .card p,.slide.mist .card p{color:#65655f}
+.num-badge{font-family:var(--disp);font-weight:900;font-size:clamp(20px,2.9cqw,40px);color:var(--pink);display:block;margin-bottom:clamp(8px,1.1cqw,16px)}
+.slide.light .num-badge,.slide.mist .num-badge{color:var(--gold)}
+.feats{display:flex;flex-direction:column;gap:clamp(8px,1.1cqw,16px);margin-top:clamp(18px,2.4cqw,32px)}
+.feat{display:flex;gap:clamp(12px,1.7cqw,22px);align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:clamp(11px,1.7cqw,22px) clamp(14px,2.1cqw,28px)}
+.feat .fi{flex:none;font-family:var(--disp);font-weight:900;color:var(--pink);width:clamp(26px,3.4cqw,44px);height:clamp(26px,3.4cqw,44px);border-radius:50%;border:1px solid rgba(255,167,226,.4);display:flex;align-items:center;justify-content:center;margin-top:1px;font-size:clamp(12px,1.5cqw,20px)}
+.feat b{display:block;font-weight:700;font-size:clamp(15px,2cqw,26px);color:var(--mist);margin-bottom:1px}
+.feat span{font-size:clamp(13px,1.75cqw,22px);color:var(--muted);line-height:1.35}
+
+/* ---------- LISTS / STEPS ---------- */
+ul.clean{list-style:none;margin-top:clamp(24px,3.2cqw,42px);display:flex;flex-direction:column;gap:clamp(12px,1.7cqw,22px)}
+ul.clean li{font-size:clamp(15px,2cqw,27px);line-height:1.4;padding-left:clamp(24px,3.2cqw,42px);position:relative;color:inherit}
+ul.clean li::before{content:"";position:absolute;left:0;top:.5em;width:clamp(9px,1.2cqw,15px);height:clamp(9px,1.2cqw,15px);border-radius:50%;background:var(--pink)}
+.steps{counter-reset:s;list-style:none;margin-top:clamp(26px,3.4cqw,44px);display:flex;flex-direction:column;gap:clamp(15px,2cqw,28px)}
+.steps li{position:relative;padding-left:clamp(52px,7cqw,92px);min-height:clamp(38px,5cqw,64px);display:flex;align-items:center;font-size:clamp(15px,2cqw,27px);line-height:1.32}
+.steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:50%;transform:translateY(-50%);width:clamp(38px,5cqw,64px);height:clamp(38px,5cqw,64px);border-radius:50%;background:var(--pink);color:var(--ink2);font-family:var(--disp);font-weight:900;font-size:clamp(16px,2.3cqw,34px);display:flex;align-items:center;justify-content:center}
+
+/* ---------- PREISE ---------- */
+.wp{background:linear-gradient(150deg,#332033,#1a1a1a 70%);border:1px solid rgba(255,167,226,.25);border-radius:24px;padding:clamp(26px,4cqw,52px);margin-top:clamp(26px,3.4cqw,44px);position:relative;overflow:hidden}
+.wp .pname{font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);font-size:clamp(12px,1.6cqw,20px);display:block}
+.wp-amt{font-family:var(--disp);font-weight:900;font-size:clamp(56px,17cqw,180px);color:#fff;line-height:.9;margin:clamp(6px,.8cqw,12px) 0 clamp(4px,.6cqw,10px)}
+.wp-tag{font-weight:600;font-size:clamp(17px,2.4cqw,32px);color:#fff;margin-bottom:clamp(16px,2.2cqw,30px)}
+.mini{list-style:none;display:flex;flex-wrap:wrap;gap:8px 18px}
+.mini li{position:relative;font-size:clamp(14px,1.8cqw,24px);color:var(--mist);padding-left:clamp(16px,2cqw,26px)}
+.mini li::before{content:"/";position:absolute;left:0;color:var(--gold);font-weight:700}
+.mini.check{flex-direction:column;gap:clamp(9px,1.3cqw,18px);margin-top:clamp(14px,2cqw,26px)}
+.mini.check li{padding-left:clamp(24px,3cqw,40px);color:var(--muted)}
+.mini.check li::before{content:"";left:2px;top:.45em;width:11px;height:6px;border-left:2px solid var(--pink);border-bottom:2px solid var(--pink);transform:rotate(-45deg)}
+.anrech{margin-top:clamp(13px,1.8cqw,24px);background:var(--pink);color:var(--ink2);border-radius:14px;padding:clamp(13px,1.8cqw,24px) clamp(18px,2.4cqw,32px);font-weight:600;font-size:clamp(15px,1.95cqw,26px)}
+.tier{background:linear-gradient(160deg,#241f24,#191919);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:clamp(22px,3.2cqw,44px) clamp(24px,3.4cqw,46px);position:relative}
+.tier+.tier{margin-top:clamp(14px,1.9cqw,26px)}
+.tier.reco{border:1.5px solid var(--pink);background:linear-gradient(160deg,#2c2230,#191919)}
+.reco-tag{position:absolute;top:-11px;right:20px;background:var(--pink);color:var(--ink2);font-weight:700;font-size:clamp(11px,1.4cqw,18px);letter-spacing:.14em;text-transform:uppercase;border-radius:999px;padding:5px 12px}
+.tier .pname{font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:clamp(13px,1.7cqw,22px);color:var(--mist);display:block;margin-bottom:clamp(6px,1cqw,14px)}
+.tier .amt{font-family:var(--disp);font-weight:900;font-size:clamp(40px,6.5cqw,110px);color:#fff;line-height:1;display:flex;align-items:baseline;gap:clamp(8px,1cqw,16px)}
+.tier .amt small{font-family:var(--body);font-size:clamp(13px,1.7cqw,24px);color:var(--muted);font-weight:500}
+.tier .terms{font-size:clamp(13px,1.7cqw,24px);color:var(--gold);font-weight:600;margin:clamp(6px,.9cqw,14px) 0 2px}
+.foot-note{margin-top:clamp(16px,2.2cqw,32px);font-size:clamp(13px,1.7cqw,24px);color:var(--muted);font-style:italic}
+.drops{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.4cqw,20px);margin-top:clamp(26px,3.4cqw,44px)}
+.drop{background:linear-gradient(160deg,#241f24,#191919);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:clamp(16px,2.4cqw,34px) clamp(10px,1.6cqw,22px);text-align:center}
+.drop .d-amt{font-family:var(--disp);font-weight:900;font-size:clamp(26px,4.3cqw,72px);color:#fff;line-height:1}
+.drop .d-n{font-weight:700;font-size:clamp(13px,1.7cqw,24px);color:var(--pink);margin-top:clamp(8px,1cqw,14px)}
+.drop .d-t{font-size:clamp(12px,1.4cqw,20px);color:var(--muted);margin-top:clamp(3px,.5cqw,8px)}
+@media (max-width:360px){.drops{grid-template-columns:1fr}.drop{display:flex;justify-content:space-between;align-items:center;text-align:left}.drop .d-n,.drop .d-t{margin-top:0}}
+.usp-shared{margin-top:clamp(14px,2cqw,24px);background:var(--card);border:1px solid var(--line);border-radius:16px;padding:clamp(16px,2.4cqw,30px) clamp(18px,2.6cqw,34px)}
+.usp-shared .h{font-weight:700;font-size:clamp(12px,1.5cqw,20px);letter-spacing:.1em;text-transform:uppercase;color:var(--pink);margin-bottom:clamp(10px,1.4cqw,18px)}
+.slide.light .usp-shared,.slide.mist .usp-shared{background:#fff;border-color:rgba(0,0,0,.07);box-shadow:0 8px 26px rgba(0,0,0,.05)}
+.slide.light .usp-shared .mini.check li,.slide.mist .usp-shared .mini.check li{color:#55554f}
+.mini.no{flex-direction:column;gap:clamp(9px,1.3cqw,18px);margin-top:clamp(14px,2cqw,26px)}
+.mini.no li{padding-left:clamp(24px,3cqw,40px);color:var(--muted);text-decoration:line-through;text-decoration-color:rgba(154,154,147,.55)}
+.mini.no li::before{content:"\00d7";left:2px;top:0;color:var(--muted);font-weight:700;border:0;width:auto;height:auto;transform:none}
+
+/* ---------- FUNNEL ---------- */
+.funnel{display:flex;flex-direction:column;margin-top:clamp(18px,2.6cqw,36px)}
+.fn{display:grid;grid-template-columns:clamp(22px,3cqw,40px) 1fr;gap:clamp(11px,1.5cqw,20px);align-items:stretch}
+.fn .rail{position:relative;display:flex;justify-content:center}
+.fn .rail::before{content:"";position:absolute;top:0;bottom:0;width:2px;background:var(--line)}
+.fn:first-child .rail::before{top:50%}
+.fn:last-child .rail::before{bottom:50%}
+.fn .dot{position:relative;align-self:center;width:clamp(12px,1.5cqw,18px);height:clamp(12px,1.5cqw,18px);border-radius:50%;background:var(--ink);border:2px solid var(--pink);z-index:1}
+.fn .body{padding:clamp(6px,.9cqw,12px) 0;display:flex;align-items:center;gap:clamp(8px,1.1cqw,16px);flex-wrap:wrap}
+.fn .t{font-weight:600;font-size:clamp(14px,1.85cqw,25px);color:var(--mist);line-height:1.2}
+.fn.phase{margin-top:clamp(6px,.8cqw,12px)}
+.fn.phase .dot{width:clamp(15px,1.9cqw,24px);height:clamp(15px,1.9cqw,24px);background:var(--pink)}
+.fn.phase .t{font-family:var(--disp);font-weight:900;text-transform:uppercase;color:#fff;font-size:clamp(16px,2.2cqw,30px);letter-spacing:.01em}
+.fn.win .dot{background:#fff;border-color:#fff}
+.pill{font-weight:700;font-size:clamp(10px,1.3cqw,16px);letter-spacing:.07em;text-transform:uppercase;border-radius:999px;padding:clamp(3px,.5cqw,7px) clamp(9px,1.2cqw,15px);white-space:nowrap}
+.pill.mail{background:var(--pink);color:var(--ink2)}
+.pill.card{background:var(--gold);color:#fff}
+.pill.win{background:#fff;color:var(--ink2)}
+.zoomwrap{transform-origin:center center;will-change:transform}
+
+/* ---------- MAIL / FIX / ORG / SHOTS ---------- */
+.mailcard{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--pink);border-radius:14px;padding:clamp(15px,2.2cqw,30px) clamp(17px,2.5cqw,34px)}
+.mailcard .mh{display:flex;align-items:baseline;gap:clamp(8px,1.2cqw,16px);margin-bottom:clamp(7px,1cqw,14px);flex-wrap:wrap}
+.mailcard .mn{font-family:var(--disp);font-weight:900;text-transform:uppercase;color:#fff;font-size:clamp(16px,2.1cqw,28px)}
+.mailcard .when{font-size:clamp(11px,1.35cqw,18px);font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--gold)}
+.mailcard ul{list-style:none;display:flex;flex-direction:column;gap:clamp(5px,.8cqw,11px)}
+.mailcard li{position:relative;padding-left:clamp(17px,2.1cqw,28px);font-size:clamp(13px,1.7cqw,22px);color:var(--muted);line-height:1.35}
+.mailcard li::before{content:"";position:absolute;left:2px;top:.55em;width:7px;height:7px;border-radius:50%;background:var(--pink)}
+.fixrow{display:flex;flex-direction:column;gap:clamp(11px,1.6cqw,20px);margin-top:clamp(24px,3.2cqw,42px)}
+.fixcard{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--pink);border-radius:14px;padding:clamp(14px,2.1cqw,28px) clamp(16px,2.4cqw,32px)}
+.fixcard .pl{display:block;font-weight:700;font-size:clamp(11px,1.35cqw,18px);letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:clamp(5px,.7cqw,10px)}
+.fixcard b{display:block;font-weight:700;font-size:clamp(15px,2cqw,27px);color:#fff;margin-bottom:clamp(4px,.6cqw,9px)}
+.fixcard p{font-size:clamp(13px,1.7cqw,22px);color:var(--muted);line-height:1.42}
+.fixcard p .do{color:var(--pink);font-weight:600}
+.org{margin-top:clamp(26px,3.4cqw,44px);display:flex;flex-direction:column;align-items:center}
+.org .box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:clamp(12px,1.8cqw,24px) clamp(18px,2.6cqw,36px);text-align:center;min-width:clamp(160px,32cqw,360px)}
+.org .box.top{border-color:var(--pink);background:linear-gradient(160deg,rgba(255,167,226,.08),transparent)}
+.org .box b{display:block;font-weight:700;font-size:clamp(15px,2cqw,28px);color:#fff}
+.org .box span{font-size:clamp(12px,1.4cqw,20px);color:var(--muted)}
+.org .stem{width:2px;height:clamp(16px,2.2cqw,32px);background:var(--line)}
+.org .row{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.4cqw,20px);width:100%}
+.org .row .box{min-width:0}
+@media (max-width:440px){.org .row{grid-template-columns:1fr;gap:8px}}
+.shots{display:grid;gap:clamp(12px,1.8cqw,24px);margin-top:clamp(22px,3cqw,40px)}
+.shots.two{grid-template-columns:1fr 1fr}
+.shot{border-radius:clamp(12px,1.6cqw,22px);overflow:hidden;border:1px solid var(--line);background:#0d0d0d;box-shadow:0 18px 50px -22px rgba(0,0,0,.6)}
+.shot img{width:100%;height:auto;display:block}
+.cap{margin-top:clamp(8px,1.1cqw,16px);font-size:clamp(12px,1.5cqw,20px);color:var(--muted);font-style:italic}
+@media (max-width:430px){.shots.two{grid-template-columns:1fr}}
+.pb-note{margin-top:clamp(16px,2.2cqw,30px);display:inline-flex;align-items:center;gap:10px;background:var(--card);border:1px solid rgba(255,167,226,.35);border-radius:999px;padding:clamp(9px,1.2cqw,16px) clamp(16px,2.2cqw,28px);font-size:clamp(12px,1.55cqw,20px);color:var(--mist)}
+.pb-note b{color:var(--pink);font-weight:700}
+
+/* churn bg */
+#churn{background:radial-gradient(circle at 30% 0%,#3a2233,#1a1a1a 62%)}
+
+/* scroll cue */
+.scrollcue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:3;font-size:clamp(10px,1.2cqw,15px);letter-spacing:.2em;text-transform:uppercase;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:7px}
+.scrollcue .dot{width:5px;height:5px;border-radius:50%;background:var(--pink);animation:fall 1.6s infinite}
+@keyframes fall{0%{transform:translateY(-6px);opacity:0}40%{opacity:1}100%{transform:translateY(10px);opacity:0}}
+
+/* hover */
+.card,.feat,.ph,.alt,.drop,.mailcard,.fixcard{transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .4s var(--ease)}
+@media (hover:hover) and (pointer:fine){
+  .card:hover,.feat:hover,.drop:hover,.mailcard:hover,.fixcard:hover{transform:translateY(-5px);border-color:var(--pink);box-shadow:0 18px 42px -14px rgba(0,0,0,.55)}
+  .slide.light .card:hover,.slide.mist .card:hover{box-shadow:0 18px 42px -16px rgba(0,0,0,.2)}
+}
+@media (prefers-reduced-motion:reduce){.scrollcue .dot{animation:none}}
+</style>
+</head>
+<body>
+<div class="device">
+  <div id="bar"></div>
+  <div class="hud">
+    <span class="brand"><span class="mark"><svg viewBox="0 0 64 44" aria-hidden="true"><ellipse cx="32" cy="22" rx="30" ry="19" fill="none" stroke="currentColor" stroke-width="4"/><path d="M36 9 L23 24 L31 24 L28 35 L43 19 L34 19 Z" fill="currentColor"/></svg></span> D!<b>'</b>S DANCE WORLD</span>
+    <span class="chapind"><em id="chapnum">00</em> · <span id="chaptitle">Welcome In</span></span>
+  </div>
+
+  <div class="stage" id="stage">
+
+    <!-- HERO -->
+    <section class="slide" id="hero" data-chap="00" data-chaptitle="Welcome In">
+      <span class="ghost">IN</span>
+      <div class="wrap">
+        <span class="eyebrow rv">D!'s Dance World · Kick-off · v2</span>
+        <h1 class="rv">Welcome<br><span class="pink">In</span></h1>
+        <p class="ko-sub rv">Unser neuer Weg vom ersten Kontakt zum Mitglied.</p>
+      </div>
+      <div class="scrollcue">Scrollen<span class="dot"></span></div>
+    </section>
+
+    <!-- ============ KAPITEL 01 · WARUM ============ -->
+    <section class="slide chap" id="chap01" data-chap="01" data-chaptitle="Warum">
+      <div class="bigmark"><svg viewBox="0 0 64 44" aria-hidden="true"><ellipse cx="32" cy="22" rx="30" ry="19" fill="none" stroke="currentColor" stroke-width="4"/><path d="M36 9 L23 24 L31 24 L28 35 L43 19 L34 19 Z" fill="currentColor"/></svg></div>
+      <div class="wrap">
+        <span class="chapkick rv">Kapitel</span>
+        <span class="chapnum rv">01</span>
+        <h2 class="chaptitle rv">Warum</h2>
+        <p class="lead rv">Zwei Zahlen aus unseren eigenen Daten. Belegt, nicht geschätzt.</p>
+      </div>
+    </section>
+
+    <section class="slide">
+      <span class="ghost">€</span>
+      <div class="wrap">
+        <span class="eyebrow rv">Befund 1</span>
+        <div class="big rv" data-count="84000" data-suffix=" €">0</div>
+        <h2 class="rv" style="font-size:clamp(22px,5.2cqw,58px);margin-top:clamp(14px,2cqw,28px)">kostet uns der Counter pro Jahr.</h2>
+        <p class="lead rv">Und bringt davon keinen einzigen Abschluss zurück.</p>
+      </div>
+    </section>
+
+    <section class="slide">
+      <span class="ghost">1700</span>
+      <div class="wrap">
+        <span class="eyebrow rv">Befund 2</span>
+        <div class="big rv" data-count="1700">0</div>
+        <h2 class="rv" style="font-size:clamp(22px,5.2cqw,58px);margin-top:clamp(14px,2cqw,28px)">Gäste waren nur ein Mal da.</h2>
+        <p class="lead rv">Sie haben getanzt und sind gegangen — ohne dass wir wussten, wer sie sind.</p>
+      </div>
+    </section>
+
+    <section class="slide mist">
+      <div class="wrap">
+        <span class="eyebrow rv">Die Wende</span>
+        <h2 class="rv">Wir verkaufen keine Class.<br>Wir schaffen Zugehörigkeit.</h2>
+        <p class="lead rv">Die Membership ist nicht der Anfang. Sie ist das Ergebnis einer guten Experience. Wer sich gesehen fühlt, bleibt.</p>
+      </div>
+    </section>
+
+    <!-- ============ KAPITEL 02 · DIE NEUE ROLLE ============ -->
+    <section class="slide chap" id="chap02" data-chap="02" data-chaptitle="Die neue Rolle">
+      <div class="bigmark"><svg viewBox="0 0 64 44" aria-hidden="true"><ellipse cx="32" cy="22" rx="30" ry="19" fill="none" stroke="currentColor" stroke-width="4"/><path d="M36 9 L23 24 L31 24 L28 35 L43 19 L34 19 Z" fill="currentColor"/></svg></div>
+      <div class="wrap">
+        <span class="chapkick rv">Kapitel</span>
+        <span class="chapnum rv">02</span>
+        <h2 class="chaptitle rv">Der Welcomer</h2>
+        <p class="lead rv">Ab jetzt hat jeder Abend ein Gesicht.</p>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="wrap">
+        <span class="eyebrow rv">Die Rolle</span>
+        <h2 class="rv">Nicht „der am Counter".<br>Verantwortlich.</h2>
+        <p class="lead rv">Der Welcomer sorgt dafür, dass kein Gast unbemerkt rein- und wieder rausgeht.</p>
+        <div class="feats">
+          <div class="feat rv"><span class="fi">1</span><div><b>Begrüßt</b><span>Aktiv, mit Namen, echtes Hallo. Erkennt jeden Erstbesucher sofort.</span></div></div>
+          <div class="feat rv"><span class="fi">2</span><div><b>Begleitet</b><span>Vom Welcome Desk zur Class und zurück — mit der Welcome Card als rotem Faden.</span></div></div>
+          <div class="feat rv"><span class="fi">3</span><div><b>Schließt ab</b><span>Führt das Membership-Gespräch selbst. Kein Weiterreichen, kein Warten.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ KAPITEL 03 · DER FUNNEL ============ -->
+    <section class="slide chap" id="chap03" data-chap="03" data-chaptitle="Der Funnel">
+      <div class="bigmark"><svg viewBox="0 0 64 44" aria-hidden="true"><ellipse cx="32" cy="22" rx="30" ry="19" fill="none" stroke="currentColor" stroke-width="4"/><path d="M36 9 L23 24 L31 24 L28 35 L43 19 L34 19 Z" fill="currentColor"/></svg></div>
+      <div class="wrap">
+        <span class="chapkick rv">Kapitel</span>
+        <span class="chapnum rv">03</span>
+        <h2 class="chaptitle rv">Der Funnel</h2>
+        <p class="lead rv">Erst komplett auf einen Blick — dann zoomen wir Phase für Phase rein.</p>
+      </div>
+    </section>
+
+    <section class="slide dense" id="funnel">
+      <div class="wrap">
+        <span class="eyebrow rv">Gesamtübersicht</span>
+        <h2 class="rv">Von der Buchung<br>bis zum Abo</h2>
+        <div class="funnel">
+          <div class="fn phase rv"><div class="rail"><span class="dot"></span></div><div class="body"><span class="t">Phase 1 · Kauf &amp; Vorfreude</span></div></div>
+          <div class="fn rv"><div class="rail"><span class="dot"></span></div><div class="body"><span class="t">Buchung über Eversports</span></div></div>
+          <div class="fn rv"><div class="rail"><span class="dot"></span></div><div class="body"><span class="t">Mail 1 · Willkommen</span><span class="pill mail">direkt</span></div></div>
+          <div class="fn rv"><div class="rail"><span class="dot"></span></div><div class="body"><span class="t">Mail 2 · Infos zum Besuch</span><span class="pill mail">~12 h vorher</span></div></div>
+          <div class="fn phase rv"><div class="rail"><span class="dot"></span></div><div class="body"><span class="t">Phase 2 · Erster Besuch</span></div></div>
+          <div class="fn rv"><div class="rail"><span class="dot"></span></div><div class="body"><span class="t">Welcome Desk · aktiv begrüßen</span><span class="pill card">Welcome Card</span></div></div>
+          <div class="fn rv"><div class="rail"><span class="dot"></span></div><div class="body"><span class="t">Coach inspiriert &amp; lenkt zurück</span></div></div>
+          <div class="fn rv"><div class="rail"><span class="dot"></span></div><div class="body"><span class="t">Nachgespräch am Desk</span></div></div>
+          <div class="fn rv"><div class="rail"><span class="dot"></span></div><div class="body"><span class="t">Mail 3 · nach der Class</span><span class="pill mail">Tag danach</span></div></div>
+          <div class="fn phase rv"><div class="rail"><span class="dot"></span></div><div class="body"><span class="t">Phase 3 · Zweiter Besuch</span></div></div>
+          <div class="fn rv"><div class="rail"><span class="dot"></span></div><div class="body"><span class="t">Empfang mit Vorwissen</span><span class="pill card">Welcome Card</span></div></div>
+          <div class="fn rv"><div class="rail"><span class="dot"></span></div><div class="body"><span class="t">Kleine Überraschung</span></div></div>
+          <div class="fn rv"><div class="rail"><span class="dot"></span></div><div class="body"><span class="t">Membership-Gespräch</span></div></div>
+          <div class="fn phase win rv"><div class="rail"><span class="dot"></span></div><div class="body"><span class="t">Abschluss</span><span class="pill win">29 € angerechnet</span></div></div>
+          <div class="fn rv"><div class="rail"><span class="dot"></span></div><div class="body"><span class="t">Abo: Basic oder Unlimited</span></div></div>
+          <div class="fn rv"><div class="rail"><span class="dot"></span></div><div class="body"><span class="t">sonst: Mail 4 + Telefon</span><span class="pill mail">24–48 h</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide zoomsec">
+      <div class="wrap zoomwrap">
+        <span class="eyebrow rv">Funnel · Phase 1 / 4</span>
+        <h2 class="rv">Kauf &amp; Vorfreude</h2>
+        <p class="lead rv">Zwei Mails bereiten den ersten Besuch vor — die Beziehung beginnt vor der Tür.</p>
+        <div class="grid">
+          <div class="mailcard rv"><div class="mh"><span class="mn">Mail 1 · Willkommen</span><span class="when">direkt nach Buchung</span></div><ul><li>Vorfreude wecken</li><li>Community spürbar machen</li><li>Erste Beziehung aufbauen</li></ul></div>
+          <div class="mailcard rv"><div class="mh"><span class="mn">Mail 2 · Bald geht's los</span><span class="when">~12 h vorher</span></div><ul><li>10–15 Min vorher da sein</li><li>Beim Welcome-Team melden</li><li>Adresse, Aufzug, 3. Etage</li></ul></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide zoomsec">
+      <div class="wrap zoomwrap">
+        <span class="eyebrow rv">Funnel · Phase 2 / 4</span>
+        <h2 class="rv">Erster Besuch</h2>
+        <p class="lead rv">Hier greift die <b style="color:var(--gold)">Welcome Card</b> — vom Welcome Desk in die Class und zurück.</p>
+        <ol class="steps">
+          <li class="rv">Welcome Desk: aktiv begrüßen &amp; Welcome Card ausfüllen</li>
+          <li class="rv">Coach inspiriert und schickt zum Desk zurück</li>
+          <li class="rv">Nachgespräch: vier Fragen, kein Verkauf</li>
+          <li class="rv">Mail 3 am Tag nach der Class</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="slide zoomsec">
+      <div class="wrap zoomwrap">
+        <span class="eyebrow rv">Funnel · Phase 3 / 4</span>
+        <h2 class="rv">Zweiter Besuch</h2>
+        <ol class="steps">
+          <li class="rv">Empfang mit Vorwissen — „Schön, dass du wieder da bist."</li>
+          <li class="rv">Kleine Überraschung am Welcome Desk</li>
+          <li class="rv">Membership-Gespräch — der Welcomer führt</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="slide zoomsec">
+      <div class="wrap zoomwrap">
+        <span class="eyebrow rv">Funnel · Phase 4 / 4</span>
+        <h2 class="rv">Abschluss</h2>
+        <div class="grid">
+          <div class="card rv" style="border-color:var(--pink)"><h3 style="color:var(--pink)">Sofort: Abo</h3><p>Basic oder Unlimited. Die 29 € des Welcome Passes werden angerechnet.</p></div>
+          <div class="card rv"><h3>Sonst: Nachfassen</h3><p>Mail 4 + Telefon, 24–48 h nach dem Besuch. Freundlich, mit Bedarf klären.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ KAPITEL 04 · DAS PLAYBOOK ============ -->
+    <section class="slide chap mist" id="chap04" data-chap="04" data-chaptitle="Das Playbook">
+      <div class="bigmark"><svg viewBox="0 0 64 44" aria-hidden="true"><ellipse cx="32" cy="22" rx="30" ry="19" fill="none" stroke="currentColor" stroke-width="4"/><path d="M36 9 L23 24 L31 24 L28 35 L43 19 L34 19 Z" fill="currentColor"/></svg></div>
+      <div class="wrap">
+        <span class="chapkick rv">Kapitel</span>
+        <span class="chapnum rv">04</span>
+        <h2 class="chaptitle rv">Das Playbook</h2>
+        <p class="lead rv">Der ganze Ablauf Schritt für Schritt — dein Nachschlagewerk für den Abend.</p>
+        <span class="pb-note rv"><b>Version 1</b>&nbsp;— wächst in den nächsten Wochen weiter.</span>
+      </div>
+    </section>
+
+    <section class="slide dense">
+      <div class="wrap">
+        <span class="eyebrow rv">Wer kommt zu uns</span>
+        <h2 class="rv">Jeder Gast startet<br>die Journey</h2>
+        <div class="grid">
+          <div class="card rv"><span class="num-badge">01</span><h3>Welcome Pass</h3><p>29 €, zwei Check-ins. Der geführte Einstieg.</p></div>
+          <div class="card rv"><span class="num-badge">02</span><h3>Drop-In-Karten</h3><p>3er, 5er, 10er. Flexibel ohne Abo.</p></div>
+          <div class="card rv"><span class="num-badge">03</span><h3>USC-Member</h3><p>UrbanSports-Gäste bekommen die <b style="color:var(--pink)">Welcome Card</b> und werden wie Erstbesucher begleitet.</p></div>
+          <div class="card rv"><span class="num-badge">04</span><h3>Walk-In</h3><p>Wird am Counter beraten und in den Welcome Pass geführt.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide dense" id="mails">
+      <div class="wrap">
+        <span class="eyebrow rv">Playbook · Die Mails</span>
+        <h2 class="rv">Vier Mails,<br>klare Taktung</h2>
+        <div class="grid">
+          <div class="mailcard rv"><div class="mh"><span class="mn">Mail 1</span><span class="when">direkt nach Buchung</span></div><ul><li>Willkommen, Vorfreude, Community spürbar machen</li></ul></div>
+          <div class="mailcard rv"><div class="mh"><span class="mn">Mail 2</span><span class="when">~12 h vor Termin</span></div><ul><li>Anreise, 10–15 Min vorher da, beim Welcome-Team melden</li></ul></div>
+          <div class="mailcard rv"><div class="mh"><span class="mn">Mail 3</span><span class="when">am Tag nach der Class</span></div><ul><li>Begeisterung verstärken, 2. Check-in sichern, 29 € platzieren</li></ul></div>
+          <div class="mailcard rv"><div class="mh"><span class="mn">Mail 4</span><span class="when">nur ohne Abschluss</span></div><ul><li>Conversion: Basic ab 55 €, Unlimited ab 69 €, Beratung anbieten</li></ul></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide dense">
+      <div class="wrap">
+        <span class="eyebrow rv">Schichtbeginn</span>
+        <h2 class="rv">Der Tag beginnt<br>mit den Leads</h2>
+        <p class="lead rv">Kein Lead bleibt liegen — direkt zu Schichtbeginn alle Quellen prüfen.</p>
+        <ul class="clean">
+          <li class="rv">E-Mails, An- und Abmeldungen, WhatsApp, Instagram sichten</li>
+          <li class="rv">Telefonnummer da? Direkt anrufen. Sonst per E-Mail/WhatsApp.</li>
+          <li class="rv">Immer zum Welcome Pass hinleiten</li>
+          <li class="rv">Erstbesucher aus Eversports ziehen, Welcome Cards vorbereiten</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="slide dense">
+      <div class="wrap">
+        <span class="eyebrow rv">Erster Besuch</span>
+        <h2 class="rv">Der erste Eindruck<br>am Welcome Desk</h2>
+        <ol class="steps">
+          <li class="rv">Aktiv und mit Namen begrüßen</li>
+          <li class="rv">„Ist das deine erste Class bei uns?"</li>
+          <li class="rv">Welcome Card gemeinsam ausfüllen, Karte dem Coach mitgeben</li>
+          <li class="rv">Rückhol-Auftrag: „Komm nach der Class nochmal zu mir."</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="slide dense" id="welcome-card">
+      <div class="wrap">
+        <span class="eyebrow rv">Das Werkzeug</span>
+        <h2 class="rv">Die Welcome Card<br>verbindet alles</h2>
+        <p class="lead rv">Der rote Faden vom Welcome Desk zum Coach und zurück — sichtbar, wer heute zum ersten Mal da ist.</p>
+        <div class="shots two">
+          <div class="rv"><div class="shot"><img src="img/wc-front.png" alt="Welcome Card Vorderseite" loading="lazy"></div><div class="cap">Vorderseite · 1. &amp; 2. Besuch</div></div>
+          <div class="rv"><div class="shot"><img src="img/wc-back.png" alt="Welcome Card Rückseite" loading="lazy"></div><div class="cap">Rückseite · Name, Telefon, Class, Coach</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide mist dense">
+      <div class="wrap">
+        <span class="eyebrow rv">In der Class &amp; danach</span>
+        <h2 class="rv">Der Coach schafft<br>den Moment</h2>
+        <p class="lead rv">Vor der Class: „Hab Spaß, mach dir keinen Stress." Danach: „Wie war's? Nimm die Karte mit zum Welcome-Team."</p>
+        <ul class="clean">
+          <li class="rv">Wie hat dir die Class gefallen?</li>
+          <li class="rv">War der Style das Richtige für dich?</li>
+          <li class="rv">Hat dir der Coach gefallen?</li>
+          <li class="rv">Welchen Style möchtest du als Nächstes ausprobieren?</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="slide dense">
+      <div class="wrap">
+        <span class="eyebrow rv">Zweiter Besuch</span>
+        <h2 class="rv">Beim zweiten Mal<br>kennen wir dich</h2>
+        <p class="lead rv">Aus Eversports wissen wir vorab, wer zum zweiten Mal kommt — und empfangen mit Vorwissen.</p>
+        <div class="grid">
+          <div class="card rv"><h3>Empfang &amp; Goodie</h3><p>Persönlicher Empfang, kleine Überraschung nach dem zweiten Besuch (Flasche, Socken, Beutel) — nur für Welcome-Pass-Kunden.</p></div>
+          <div class="card rv" style="border-color:var(--pink)"><h3 style="color:var(--pink)">Welcome Card am Counter</h3><p>Karte bleibt nach dem ersten Besuch am Desk und wird zum zweiten Besuch wieder ausgehändigt — automatisch persönlicher Kontakt.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide dense">
+      <div class="wrap">
+        <span class="eyebrow rv">Der Abschluss</span>
+        <h2 class="rv">Das Membership-Gespräch<br>führt der Welcomer</h2>
+        <ol class="steps">
+          <li class="rv">Bedarf klären: Wie oft willst du kommen?</li>
+          <li class="rv">Empfehlen: ein bis zwei Mal Basic, öfter Unlimited</li>
+          <li class="rv">Die 29 € des Welcome Passes anrechnen</li>
+          <li class="rv">Direkt abschließen, kein Weiterreichen</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="slide dense" id="churn">
+      <div class="wrap">
+        <span class="tag rv">Churn-Schutz</span>
+        <h2 class="rv">Wenn eine<br>Kündigung kommt</h2>
+        <p class="lead rv">Kein Endpunkt, sondern ein Anruf. Die meisten kündigen aus einem lösbaren Grund.</p>
+        <ol class="steps">
+          <li class="rv">Innerhalb von 24 h anrufen, Grund erfragen</li>
+          <li class="rv">Alternative anbieten: Tarifwechsel, Pause oder Drop-In</li>
+          <li class="rv">In der Kundenmaske dokumentieren</li>
+          <li class="rv">Fair verabschieden, Tür offen halten</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="slide mist dense">
+      <div class="wrap">
+        <span class="eyebrow rv">Team &amp; Messung</span>
+        <h2 class="rv">Klare Rollen,<br>klare Zahlen</h2>
+        <div class="grid">
+          <div class="card rv"><h3>Welcomer</h3><p>Begrüßt, begleitet und schließt ab.</p></div>
+          <div class="card rv"><h3>Coach</h3><p>Inspiriert und lenkt zum Welcome Desk zurück.</p></div>
+        </div>
+        <ul class="clean">
+          <li class="rv">Welcome Pass verkauft · Erst- und Zweitbesuch erschienen</li>
+          <li class="rv">Membership abgeschlossen · Conversionquote &amp; Churn</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ KAPITEL 05 · PREISE ============ -->
+    <section class="slide chap" id="chap05" data-chap="05" data-chaptitle="Preise">
+      <div class="bigmark"><svg viewBox="0 0 64 44" aria-hidden="true"><ellipse cx="32" cy="22" rx="30" ry="19" fill="none" stroke="currentColor" stroke-width="4"/><path d="M36 9 L23 24 L31 24 L28 35 L43 19 L34 19 Z" fill="currentColor"/></svg></div>
+      <div class="wrap">
+        <span class="chapkick rv">Kapitel</span>
+        <span class="chapnum rv">05</span>
+        <h2 class="chaptitle rv">Preise</h2>
+        <p class="lead rv">Klar, schlank, entscheidbar — Welcome Pass, Memberships, Drop-Ins.</p>
+      </div>
+    </section>
+
+    <section class="slide light">
+      <div class="wrap">
+        <span class="eyebrow rv" style="color:var(--gold)">Preise · 01</span>
+        <h2 class="rv">Dein Einstieg,<br>ohne Risiko</h2>
+        <div class="wp rv">
+          <span class="pname">Welcome Pass</span>
+          <div class="wp-amt">29 €</div>
+          <div class="wp-tag">2 Classes, ein echtes Kennenlernen.</div>
+          <ul class="mini"><li>2 Check-ins</li><li>10 Tage gültig, endet automatisch</li><li>ohne Abo, ohne Bindung</li></ul>
+        </div>
+        <div class="anrech rv">Die 29 € werden voll auf deine Membership angerechnet.</div>
+      </div>
+    </section>
+
+    <section class="slide light dense">
+      <div class="wrap">
+        <span class="eyebrow rv" style="color:var(--gold)">Preise · 02</span>
+        <h2 class="rv">Zwei Memberships.<br>Mehr nicht.</h2>
+        <div style="margin-top:clamp(20px,2.6cqw,36px)">
+          <div class="tier rv"><span class="pname">Basic</span><div class="amt">55 €<small>/ Monat</small></div><div class="terms">im Jahresabo · 65 € monatlich</div><ul class="mini check"><li>8 Check-ins pro Monat</li></ul></div>
+          <div class="tier reco rv"><span class="reco-tag">Empfohlen</span><span class="pname">Unlimited</span><div class="amt">69 €<small>/ Monat</small></div><div class="terms">im Jahresabo · 79 € monatlich</div><ul class="mini check"><li>Unbegrenzt alle Classes</li></ul></div>
+          <div class="usp-shared rv"><div class="h">In Basic &amp; Unlimited enthalten</div><ul class="mini check"><li>Alle Stile: Hip Hop, Heels, Pole und mehr</li><li>Über 40 Kurse pro Woche, 30 Coaches</li><li>Zugang zur Functional Fitness Area</li><li>Priorität bei Kursbuchung &amp; Vorab-Check-in</li><li>Kostenloses Wasser an der Refill-Station</li></ul></div>
+        </div>
+        <p class="foot-note rv">Kündigungsfrist 30 Tage zum Laufzeitende.</p>
+      </div>
+    </section>
+
+    <section class="slide light dense">
+      <div class="wrap">
+        <span class="eyebrow rv" style="color:var(--gold)">Preise · 03</span>
+        <h2 class="rv">Drop-In-Karten</h2>
+        <p class="lead rv" style="color:#55554f">Ohne Mitgliedschaft. Flexibel, wann du willst.</p>
+        <div class="drops">
+          <div class="drop rv"><div class="d-amt">69 €</div><div class="d-n">3er-Karte</div><div class="d-t">2 Monate gültig</div></div>
+          <div class="drop rv"><div class="d-amt">99 €</div><div class="d-n">5er-Karte</div><div class="d-t">3 Monate gültig</div></div>
+          <div class="drop rv"><div class="d-amt">179 €</div><div class="d-n">10er-Karte</div><div class="d-t">6 Monate gültig</div></div>
+        </div>
+        <div class="usp-shared rv">
+          <div class="h">In jeder Drop-In-Karte enthalten</div>
+          <ul class="mini check"><li>Alle Stile: Hip Hop, Heels, Pole und mehr</li><li>Über 40 Kurse pro Woche, 30 Coaches</li><li>Kostenloses Wasser an der Refill-Station</li></ul>
+          <ul class="mini no"><li>Zugang zur Functional Fitness Area</li><li>Bevorzugter Check-in</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ KAPITEL 06 · STATUS QUO ============ -->
+    <section class="slide chap" id="chap06" data-chap="06" data-chaptitle="Status quo">
+      <div class="bigmark"><svg viewBox="0 0 64 44" aria-hidden="true"><ellipse cx="32" cy="22" rx="30" ry="19" fill="none" stroke="currentColor" stroke-width="4"/><path d="M36 9 L23 24 L31 24 L28 35 L43 19 L34 19 Z" fill="currentColor"/></svg></div>
+      <div class="wrap">
+        <span class="chapkick rv">Kapitel</span>
+        <span class="chapnum rv">06</span>
+        <h2 class="chaptitle rv">Status quo</h2>
+        <p class="lead rv">Klartext: Der Prozess steht. Drumherum fehlt noch Struktur. Vier Dinge — alle lösbar.</p>
+      </div>
+    </section>
+
+    <section class="slide dense" id="org">
+      <div class="wrap">
+        <span class="eyebrow rv">Problem 1 · Organisation</span>
+        <h2 class="rv">Es fehlt ein klares<br>Organigramm</h2>
+        <p class="lead rv">Wer entscheidet was? Wer ist abends verantwortlich? Wir brauchen klare Zuständigkeiten.</p>
+        <div class="org">
+          <div class="box top rv"><b>Studioleitung</b><span>Strategie &amp; Entscheidung</span></div>
+          <div class="stem rv"></div>
+          <div class="row">
+            <div class="box rv"><b>Welcomer</b><span>Abend &amp; Abschluss</span></div>
+            <div class="box rv"><b>Coaches</b><span>Class &amp; Rückführung</span></div>
+            <div class="box rv"><b>Technik &amp; Support</b><span>Erreichbar auf Abruf</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide dense">
+      <div class="wrap">
+        <span class="eyebrow rv">Problem 2 · Abend-Betrieb</span>
+        <h2 class="rv">Der Welcomer trägt<br>abends zu viel allein</h2>
+        <div class="fixrow">
+          <div class="fixcard rv"><span class="pl">WhatsApp als Ticket-System</span><b>Anfragen laufen unstrukturiert rein</b><p>Es wird chaotisch. <span class="do">Klare Regeln: wer übernimmt wann, was ist offen.</span></p></div>
+          <div class="fixcard rv"><span class="pl">Technik</span><b>Welcomer löst nebenbei Technik-Probleme</b><p><span class="do">Telefonliste mit Techniker &amp; Backup — ein Anruf, Problem abgegeben.</span></p></div>
+          <div class="fixcard rv"><span class="pl">Verantwortung</span><b>Abends hängt alles an einer Person</b><p><span class="do">Klare Zuständigkeiten und erreichbare Hilfe nehmen den Druck raus.</span></p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide mist dense">
+      <div class="wrap">
+        <span class="eyebrow rv">Problem 3 · Planung</span>
+        <h2 class="rv">Agieren statt<br>reagieren</h2>
+        <p class="lead rv">Vieles wird zu spät angeschoben — Ferienplan nicht final, Events zu kurzfristig. Dieser Stress ist vermeidbar.</p>
+        <div class="fixrow">
+          <div class="fixcard rv"><span class="pl">Jetzt</span><b>Dringendes Meeting: Jahresplanung bis Dezember</b><p><span class="do">Ferien, Events, Kampagnen, Kurse — einmal sauber durchplanen.</span></p></div>
+          <div class="fixcard rv"><span class="pl">Der Effekt</span><b>Langfristige Planung entspannt ungemein</b><p>Mehr Klarheit, weniger Feuerlöschen. <span class="do">Vorne entscheiden statt hinten reagieren.</span></p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide dense">
+      <div class="wrap">
+        <span class="eyebrow rv">Problem 4 · Kommunikation</span>
+        <h2 class="rv">Marketing muss<br>sauber aufsetzen</h2>
+        <div class="fixrow">
+          <div class="fixcard rv"><span class="pl">Awareness</span><b>Die Welcome-Pass-Kampagne muss konvertieren</b><p>Reichweite allein bringt nichts. <span class="do">Ziel: vom Pass in die Membership — messbar.</span></p></div>
+          <div class="fixcard rv"><span class="pl">Empfehlung</span><b>Ein Kundenmagazin schafft Klarheit</b><p>Von der Grafik gestaltet, feste Informationslage. <span class="do">Themen vorausplanen statt improvisieren.</span></p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OUTRO -->
+    <section class="slide" id="outro" data-chap="✓" data-chaptitle="Los geht's">
+      <span class="ghost">/</span>
+      <div class="wrap">
+        <h2 class="rv">Die Membership ist nicht der Verkauf.<br>Sie ist das Ergebnis.</h2>
+        <p class="lead rv">Keiner kommt rein, ohne dass wir ihn sehen.</p>
+        <h1 class="rv" style="margin-top:clamp(28px,4cqw,60px);color:var(--pink)">Welcome In</h1>
+      </div>
+    </section>
+
+  </div><!-- /stage -->
+</div><!-- /device -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  const stage=document.getElementById('stage');
+  const bar=document.getElementById('bar');
+  const chapNumEl=document.getElementById('chapnum');
+  const chapTitleEl=document.getElementById('chaptitle');
+  const chapEls=[...stage.querySelectorAll('[data-chap]')];
+  const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  /* ---- Fortschrittsbalken + Kapitel-Anzeige (immer, ohne GSAP) ---- */
+  let ticking=false;
+  function onScroll(){
+    if(ticking)return;ticking=true;
+    requestAnimationFrame(()=>{
+      const max=stage.scrollHeight-stage.clientHeight;
+      bar.style.width=(max>0?stage.scrollTop/max*100:0)+'%';
+      const y=stage.scrollTop+stage.clientHeight*0.4;
+      let cur=chapEls[0];
+      for(const c of chapEls){ if(c.offsetTop<=y) cur=c; }
+      if(cur){chapNumEl.textContent=cur.dataset.chap;chapTitleEl.textContent=cur.dataset.chaptitle;}
+      ticking=false;
+    });
+  }
+  stage.addEventListener('scroll',onScroll,{passive:true});
+
+  /* ---- grosse Zahl auf Rahmenbreite einpassen ---- */
+  function fitBig(el){
+    const p=el.parentElement;if(!p)return;const avail=p.clientWidth;if(!avail)return;
+    const sample=el.dataset.count?(Number(el.dataset.count).toLocaleString('de-DE')+(el.dataset.suffix||'')):el.textContent;
+    const prev=el.textContent;el.style.fontSize='100px';el.textContent=sample;
+    const w=el.scrollWidth;el.textContent=prev;
+    if(w>0)el.style.fontSize=(100*avail/w*0.96).toFixed(1)+'px';
+  }
+  function fitAllBig(){document.querySelectorAll('.big').forEach(fitBig);}
+
+  const hasGSAP=window.gsap&&window.ScrollTrigger;
+
+  if(hasGSAP&&!reduce){
+    gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.defaults({scroller:stage});
+
+    /* Reveals (build up / down) */
+    gsap.set('.rv',{autoAlpha:0,y:34});
+    ScrollTrigger.batch('.rv',{
+      scroller:stage,start:'top 88%',
+      onEnter:b=>gsap.to(b,{autoAlpha:1,y:0,duration:.8,stagger:.07,ease:'power3.out',overwrite:true}),
+      onEnterBack:b=>gsap.to(b,{autoAlpha:1,y:0,duration:.8,stagger:.07,ease:'power3.out',overwrite:true}),
+      onLeave:b=>gsap.to(b,{autoAlpha:0,y:34,duration:.35,overwrite:true}),
+      onLeaveBack:b=>gsap.to(b,{autoAlpha:0,y:34,duration:.35,overwrite:true})
+    });
+
+    /* Zoom-in beim Scrollen in die Funnel-Phasen */
+    gsap.utils.toArray('.zoomsec').forEach(sec=>{
+      const w=sec.querySelector('.zoomwrap');if(!w)return;
+      gsap.fromTo(w,{scale:.84},{scale:1,ease:'none',
+        scrollTrigger:{trigger:sec,scroller:stage,start:'top 92%',end:'top 26%',scrub:.5}});
+    });
+
+    /* Count-up */
+    gsap.utils.toArray('.big[data-count]').forEach(el=>{
+      const to=+el.dataset.count,suf=el.dataset.suffix||'';const o={v:0};fitBig(el);
+      ScrollTrigger.create({trigger:el,scroller:stage,start:'top 82%',
+        onEnter:()=>gsap.to(o,{v:to,duration:1.3,ease:'power2.out',overwrite:true,onUpdate:()=>{el.textContent=Math.round(o.v).toLocaleString('de-DE')+suf;}}),
+        onLeaveBack:()=>{gsap.killTweensOf(o);o.v=0;el.textContent='0';}});
+    });
+
+    if(document.fonts&&document.fonts.ready){document.fonts.ready.then(()=>{fitAllBig();ScrollTrigger.refresh();});}
+    addEventListener('load',()=>{fitAllBig();ScrollTrigger.refresh();});
+    let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{fitAllBig();ScrollTrigger.refresh();},200);});
+  }else{
+    /* Fallback ohne GSAP / reduced-motion: alles sichtbar, Zahlen direkt setzen */
+    document.querySelectorAll('.big[data-count]').forEach(el=>{el.textContent=(+el.dataset.count).toLocaleString('de-DE')+(el.dataset.suffix||'');fitBig(el);});
+    addEventListener('resize',fitAllBig);
+    if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitAllBig);
+  }
+  fitAllBig();
+  onScroll();
+})();
+</script>
+</body>
+</html>
